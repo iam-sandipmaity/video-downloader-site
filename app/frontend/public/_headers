@@ -1,0 +1,14 @@
+# Netlify/Vercel Headers Configuration
+# This file ensures secure downloads and proper CORS
+
+/apks/*
+  Content-Type: application/vnd.android.package-archive
+  Content-Disposition: attachment
+  X-Content-Type-Options: nosniff
+  Access-Control-Allow-Origin: *
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()

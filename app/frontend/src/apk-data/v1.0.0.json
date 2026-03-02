@@ -1,0 +1,36 @@
+{
+  "version": "v1.0.0",
+  "publishDate": "2026-02-02",
+  "fileSize": "23.4 MB",
+  "apkPath": "/apks/videodownloader-1.0.0.apk",
+  "sha256": "5B01CD9828DC921B557AA5FE1707869EE8393E2A1C441FD9A0C13E716E174C55",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader-app/releases/tag/v1",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "/apks/videodownloader-1.0.0.apk"
+  },
+  "changelog": {
+    "added": [
+      "Initial release with core video downloading functionality",
+      "YouTube download support (video only, audio only, or video+audio with merging)",
+      "Support for all video quality options from the original source",
+      "Multi-platform support: X (Twitter), Facebook, Reddit, Instagram, and more",
+      "Multiple format selection (MP4, WebM, audio formats)",
+      "Download history and management",
+      "Built with Kivy 2.3.0 for smooth Android experience",
+      "Powered by yt-dlp for reliable video extraction",
+      "Custom pure-Python MP4/WebM muxer (no native binaries required)",
+      "Optimized for Android 13 (API 33) with arm64-v8a architecture"
+    ],
+    "fixed": [],
+    "improved": [],
+    "removed": [],
+    "comingSoon": [
+      "Background download support",
+      "Enhanced UI with Material Design",
+      "Playlist download support",
+      "Download queue management",
+      "Advanced settings and preferences"
+    ]
+  }
+}

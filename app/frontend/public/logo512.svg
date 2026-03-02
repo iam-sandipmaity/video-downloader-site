@@ -1,0 +1,25 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with rounded corners -->
+  <rect width="512" height="512" rx="96" fill="url(#gradient512)"/>
+  
+  <!-- Download Icon -->
+  <g transform="translate(128, 128)">
+    <!-- Arrow shaft -->
+    <path d="M 128 32 L 128 160" stroke="white" stroke-width="32" stroke-linecap="round"/>
+    <!-- Arrow head left -->
+    <path d="M 128 160 L 80 112" stroke="white" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Arrow head right -->
+    <path d="M 128 160 L 176 112" stroke="white" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Download tray -->
+    <path d="M 48 176 L 48 208 Q 48 224, 64 224 L 192 224 Q 208 224, 208 208 L 208 176" stroke="white" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+  
+  <!-- Gradient Definition -->
+  <defs>
+    <linearGradient id="gradient512" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#14B8A6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10B981;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>
