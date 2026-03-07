@@ -34,7 +34,7 @@ This directory contains JSON files for each version of the Video Downloader App.
   "apkPath": "/apks/video-downloader-v1.1.0.apk",
   "sha256": "your-sha256-checksum-here",
   "links": {
-    "github": "https://github.com/iam-sandipmaity/video-downloader-app/releases/tag/v1.1.0",
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.1.0",
     "fdroid": "https://f-droid.org/packages/com.videodl.app/",
     "direct": "/apks/video-downloader-v1.1.0.apk"
   },

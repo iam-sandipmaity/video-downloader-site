@@ -6,9 +6,9 @@
   "apkPath": "/apks/video-downloader-v0.0.0.apk",
   "sha256": "your-sha256-checksum-here",
   "links": {
-    "github": "https://github.com/iam-sandipmaity/video-downloader-app/releases/tag/v0.0.0",
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v0.0.0",
     "fdroid": "https://f-droid.org/packages/com.videodl.app/",
-    "direct": "/apks/video-downloader-v0.0.0.apk"
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v0.0.0/videodownloader-v0.0.0.apk"
   },
   "changelog": {
     "added": [],

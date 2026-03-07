@@ -121,7 +121,7 @@ const Features = () => {
             And many more features coming soon...
           </p>
           <a
-            href="https://github.com/iam-sandipmaity/video-downloader-app"
+            href="https://github.com/iam-sandipmaity/video-downloader"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center space-x-2 text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 font-medium transition-colors group"

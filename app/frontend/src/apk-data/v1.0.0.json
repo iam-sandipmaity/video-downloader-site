@@ -5,7 +5,7 @@
   "apkPath": "/apks/videodownloader-1.0.0.apk",
   "sha256": "5B01CD9828DC921B557AA5FE1707869EE8393E2A1C441FD9A0C13E716E174C55",
   "links": {
-    "github": "https://github.com/iam-sandipmaity/video-downloader-app/releases/tag/v1",
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.0.0",
     "fdroid": "https://f-droid.org/packages/com.videodl.app/",
     "direct": "/apks/videodownloader-1.0.0.apk"
   },

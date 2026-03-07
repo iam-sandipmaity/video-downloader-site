@@ -13,7 +13,7 @@ const Footer = () => {
     ],
     Resources: [
       { name: 'Documentation', path: '/docs' },
-      { name: 'GitHub', path: 'https://github.com/iam-sandipmaity/video-downloader-app', external: true },
+      { name: 'GitHub', path: 'https://github.com/iam-sandipmaity/video-downloader', external: true },
       { name: 'F-Droid', path: 'https://f-droid.org/', external: true }
     ],
     Legal: [
@@ -41,7 +41,7 @@ const Footer = () => {
               Open-source Android video downloader powered by yt-dlp. Download videos from thousands of websites with ease.
             </p>
             <a
-              href="https://github.com/iam-sandipmaity/video-downloader-app"
+              href="https://github.com/iam-sandipmaity/video-downloader"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 text-sm text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors"

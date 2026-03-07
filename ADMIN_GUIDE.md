@@ -53,7 +53,7 @@ That's it! The website will automatically:
   "sha256": "abc123...",             // SHA256 checksum for verification
   
   "links": {
-    "github": "https://github.com/iam-sandipmaity/video-downloader-app/releases/tag/v1.1.0",
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.1.0",
     "fdroid": "https://f-droid.org/packages/com.videodl.app/",
     "direct": "/apks/video-downloader-v1.1.0.apk"
   },
@@ -178,7 +178,7 @@ Always use `YYYY-MM-DD` format:
   "apkPath": "/apks/video-downloader-v2.0.0.apk",
   "sha256": "d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2a3b4c5",
   "links": {
-    "github": "https://github.com/iam-sandipmaity/video-downloader-app/releases/tag/v2.0.0",
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v2.0.0",
     "fdroid": "https://f-droid.org/packages/com.videodl.app/",
     "direct": "/apks/video-downloader-v2.0.0.apk"
   },
@@ -214,7 +214,7 @@ Always use `YYYY-MM-DD` format:
   "apkPath": "/apks/video-downloader-v1.0.1.apk",
   "sha256": "c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2a3b4",
   "links": {
-    "github": "https://github.com/iam-sandipmaity/video-downloader-app/releases/tag/v1.0.1",
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.0.1",
     "fdroid": "https://f-droid.org/packages/com.videodl.app/",
     "direct": "/apks/video-downloader-v1.0.1.apk"
   },

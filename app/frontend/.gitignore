@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# APK binaries — hosted on GitHub Releases, not in this repo
+public/apks/*.apk
