@@ -1,0 +1,43 @@
+{
+  "version": "v1.1.0",
+  "publishDate": "2026-03-08",
+  "fileSize": "272 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly-1",
+  "sha256": "4acba02fd242f6bde77268a992dc0ca4e9174249a67d301cae29bac2066a77e8",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly-1",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-1/video-downloader-v1.1.0-debug.apk"
+  },
+  "changelog": {
+    "added": [
+      "First official release — complete rewrite in Kotlin for native Android performance",
+      "Integrated yt-dlp engine for downloading from 1000+ supported websites (YouTube, Instagram, Twitter/X, Facebook, Reddit, Vimeo, TikTok and many more)",
+      "Bundled FFmpeg for seamless video+audio merging, transcoding and post-processing",
+      "Download Queue — manage multiple downloads simultaneously with full queue control (pause, resume, reorder, cancel)",
+      "Background Downloads — downloads continue even when the app is minimised or screen is off",
+      "Download History — complete record of all past downloads with status, metadata and quick re-download option",
+      "Video Compressor — compress downloaded videos to reduce file size while preserving quality",
+      "Video/Audio Converter — convert between popular formats (MP4, MKV, WebM, MP3, AAC, OPUS and more)",
+      "Settings screen — granular control over download directory, concurrency, format preferences, notifications and more",
+      "Select video quality from all available resolutions provided by the source",
+      "Choose output format: video-only, audio-only, or merged video+audio",
+      "Supports virtually any site compatible with yt-dlp",
+      "Real-time download progress with speed and ETA indicators",
+      "Smart filename sanitisation and duplicate handling",
+      "Material You design with dynamic theming (Android 12+)"
+    ],
+    "fixed": [],
+    "improved": [],
+    "removed": [
+      "Removed legacy Kivy/Python runtime (replaced by native Kotlin app)"
+    ],
+    "comingSoon": [
+      "Playlist and channel batch download",
+      "Scheduled downloads",
+      "Built-in media player",
+      "F-Droid repository listing",
+      "Widget for quick one-tap downloads"
+    ]
+  }
+}

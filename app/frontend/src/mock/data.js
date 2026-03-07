@@ -4,11 +4,11 @@ export const appInfo = {
   name: "Video Downloader App",
   tagline: "Download videos from almost any supported platform — powered by yt-dlp.",
   description: "A powerful, open-source Android application built with Kivy that lets you download videos from YouTube, X, Facebook, Reddit, Instagram and more. Features a custom pure-Python muxer for seamless video+audio merging without native binaries.",
-  github: "https://github.com/iam-sandipmaity/video-downloader-app",
-  version: "v1.0.0",
-  releaseDate: "2026-02-02",
-  fileSize: "23.4 MB",
-  sha256: "5B01CD9828DC921B557AA5FE1707869EE8393E2A1C441FD9A0C13E716E174C55"
+  github: "https://github.com/iam-sandipmaity/video-downloader",
+  version: "v1.1.0",
+  releaseDate: "2026-03-08",
+  fileSize: "272 MB",
+  sha256: "4acba02fd242f6bde77268a992dc0ca4e9174249a67d301cae29bac2066a77e8"
 };
 
 export const features = [
@@ -65,32 +65,19 @@ export const features = [
 export const downloadOptions = [
   {
     id: 1,
-    name: "Direct APK",
-    description: "Download directly from our server",
-    icon: "Download",
-    link: "/app-latest.apk",
+    name: "GitHub Release",
+    description: "Download the latest APK from GitHub Releases",
+    icon: "Github",
+    link: "https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly-1",
     primary: true
   },
   {
     id: 2,
-    name: "GitHub Release",
-    description: "Get it from GitHub releases",
-    icon: "Github",
-    link: "https://github.com/iam-sandipmaity/video-downloader-app/releases"
-  },
-  {
-    id: 3,
-    name: "F-Droid Official",
-    description: "Install from F-Droid store",
+    name: "F-Droid",
+    description: "Coming soon — will be available on F-Droid",
     icon: "Package",
-    link: "https://f-droid.org/"
-  },
-  {
-    id: 4,
-    name: "Custom F-Droid",
-    description: "Add our F-Droid repository",
-    icon: "Server",
-    link: "#"
+    link: "#",
+    comingSoon: true
   }
 ];
 
@@ -242,8 +229,8 @@ A: We aim for monthly updates with bug fixes and improvements.
 ## Steps
 1. Clone the repository
 \`\`\`bash
-git clone https://github.com/iam-sandipmaity/video-downloader-app.git
-cd video-downloader-app
+git clone https://github.com/iam-sandipmaity/video-downloader.git
+cd video-downloader
 \`\`\`
 
 2. Open in Android Studio

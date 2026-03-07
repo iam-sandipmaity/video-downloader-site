@@ -34,7 +34,7 @@ const Hero = () => {
     {
       text: 'View on GitHub',
       icon: Github,
-      href: 'https://github.com/iam-sandipmaity/video-downloader-app',
+      href: 'https://github.com/iam-sandipmaity/video-downloader',
       primary: false
     },
     {

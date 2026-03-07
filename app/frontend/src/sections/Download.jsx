@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Download as DownloadIcon, Github, Package, Server, Copy, Check, ExternalLink, Info } from 'lucide-react';
+import { Github, Package, Copy, Check, ExternalLink, Info, Clock } from 'lucide-react';
 import { getLatestVersion } from '../utils/apkDataLoader';
 import { downloadOptions } from '../mock/data';
 
@@ -111,18 +111,19 @@ const Download = () => {
 
             {/* Primary Download Button */}
             <motion.a
-              href={latestVersion.apkPath}
-              download={`VideoDownloader-${latestVersion.version}.apk`}
+              href={latestVersion.links?.github || latestVersion.apkPath}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center justify-center space-x-2 w-full bg-white text-teal-600 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <DownloadIcon className="w-5 h-5" />
-              <span>Download APK</span>
+              <Github className="w-5 h-5" />
+              <span>Download on GitHub</span>
             </motion.a>
           </motion.div>
 
-          {/* Alternative Downloads */}
+          {/* Download Options */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -131,36 +132,48 @@ const Download = () => {
             className="space-y-4"
           >
             <h4 className="font-semibold text-gray-900 dark:text-white mb-4">
-              Alternative Downloads
+              Download Options
             </h4>
-            {downloadOptions.slice(1).map((option) => {
-              const iconMap = {
-                'Github': Github,
-                'Package': Package,
-                'Server': Server
-              };
-              const IconComponent = iconMap[option.icon] || DownloadIcon;
+            {downloadOptions.map((option) => {
+              const iconMap = { 'Github': Github, 'Package': Package };
+              const IconComponent = iconMap[option.icon] || Github;
+              const isComingSoon = option.comingSoon;
               return (
                 <motion.a
                   key={option.id}
-                  href={option.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-start space-x-3 p-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-teal-500 dark:hover:border-teal-500 transition-all group"
-                  whileHover={{ x: 4 }}
+                  href={isComingSoon ? undefined : option.link}
+                  target={isComingSoon ? undefined : '_blank'}
+                  rel={isComingSoon ? undefined : 'noopener noreferrer'}
+                  onClick={isComingSoon ? (e) => e.preventDefault() : undefined}
+                  className={`flex items-start space-x-3 p-4 rounded-lg border transition-all group ${
+                    isComingSoon
+                      ? 'bg-gray-50 dark:bg-gray-800/50 border-dashed border-gray-300 dark:border-gray-700 cursor-not-allowed opacity-60'
+                      : 'bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-teal-500 dark:hover:border-teal-500 cursor-pointer'
+                  }`}
+                  whileHover={isComingSoon ? {} : { x: 4 }}
                 >
                   <div className="mt-1">
-                    <IconComponent className="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors" />
+                    <IconComponent className={`w-5 h-5 transition-colors ${isComingSoon ? 'text-gray-400 dark:text-gray-600' : 'text-gray-600 dark:text-gray-400 group-hover:text-teal-600 dark:group-hover:text-teal-400'}`} />
                   </div>
                   <div className="flex-1">
-                    <h5 className="font-medium text-gray-900 dark:text-white mb-1">
-                      {option.name}
-                    </h5>
+                    <div className="flex items-center space-x-2 mb-1">
+                      <h5 className="font-medium text-gray-900 dark:text-white">
+                        {option.name}
+                      </h5>
+                      {isComingSoon && (
+                        <span className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-xs font-medium">
+                          <Clock className="w-3 h-3" />
+                          <span>Coming Soon</span>
+                        </span>
+                      )}
+                    </div>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                       {option.description}
                     </p>
                   </div>
-                  <ExternalLink className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity mt-1" />
+                  {!isComingSoon && (
+                    <ExternalLink className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity mt-1" />
+                  )}
                 </motion.a>
               );
             })}
