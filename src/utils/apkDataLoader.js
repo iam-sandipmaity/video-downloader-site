@@ -1,15 +1,15 @@
 /**
  * APK Data Loader
  * Dynamically loads all APK version data from the apk-data directory
- * 
+ *
  * To add a new version:
  * 1. Create a new JSON file in src/apk-data/ (e.g., v1.1.0.json)
  * 2. Follow the same structure as existing files
  * 3. The version will automatically appear on the Versions and Changelog pages
  */
 
-// Import all JSON files from apk-data directory
-const apkDataContext = require.context('../apk-data', false, /\.json$/);
+// Import all JSON files from apk-data directory (Vite glob import)
+const apkModules = import.meta.glob('../apk-data/*.json', { eager: true });
 
 /**
  * Check if a version object is valid
@@ -55,22 +55,20 @@ const isValidVersion = (version) => {
  */
 export const loadApkData = () => {
   try {
-    const apkData = apkDataContext.keys()
-      .filter(fileName => {
-        // Exclude template files and any files with 'template' in the name
+    const apkData = Object.entries(apkModules)
+      .filter(([fileName]) => {
         const isTemplate = fileName.toLowerCase().includes('template');
         return !isTemplate;
       })
-      .map(fileName => {
+      .map(([fileName, module]) => {
         try {
-          const data = apkDataContext(fileName);
-          return data;
+          return module.default ?? module;
         } catch (error) {
           console.warn(`Failed to load ${fileName}:`, error);
           return null;
         }
       })
-      .filter(data => data !== null && isValidVersion(data)); // Filter out null and invalid versions
+      .filter(data => data !== null && isValidVersion(data));
 
     // Sort by publish date (newest first)
     return apkData.sort((a, b) => {

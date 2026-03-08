@@ -1,0 +1,28 @@
+{
+  "name": "video-downloader-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for Video Downloader App landing page",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@radix-ui/react-accordion": "^1.1.2",
+    "framer-motion": "^11.0.3",
+    "lucide-react": "^0.344.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "vite": "^5.4.2"
+  },
+  "scripts": {
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  }
+}

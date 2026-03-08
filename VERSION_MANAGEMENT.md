@@ -69,13 +69,13 @@ The website automatically loads and displays your new version.
 ## File Structure
 
 ```
-vid-download/
+video-downloader-site/
 ├── public/
 │   └── apks/
 │       ├── video-downloader-v1.0.0.apk
 │       └── video-downloader-v1.1.0.apk
 │
-├── app/frontend/src/
+├── src/
 │   ├── apk-data/
 │   │   ├── template.json          ← Copy this
 │   │   ├── v1.0.0.json           ← Example
