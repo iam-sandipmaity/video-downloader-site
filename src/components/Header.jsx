@@ -12,6 +12,7 @@ const Header = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
+    { name: 'Download', path: '/download' },
     { name: 'Versions', path: '/versions' },
     { name: 'Docs', path: '/docs' },
     { name: 'Changelog', path: '/changelog' }
@@ -109,7 +110,7 @@ const Header = () => {
 
             {/* CTA Button - Desktop */}
             <Link
-              to="/#download"
+              to="/download"
               className="hidden md:flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white rounded-lg text-sm font-medium transition-all shadow-sm hover:shadow-md"
             >
               <Download className="w-4 h-4" />
@@ -156,7 +157,7 @@ const Header = () => {
                   </Link>
                 ))}
                 <Link
-                  to="/#download"
+                  to="/download"
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center justify-center space-x-2 mx-4 px-4 py-2 bg-gradient-to-r from-teal-500 to-emerald-500 text-white rounded-lg text-sm font-medium"
                 >

@@ -94,7 +94,7 @@ const Footer = () => {
               <span>by the community</span>
             </p>
             <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
-              <span>MIT License</span>
+              <Link to="/license" className="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">MIT License</Link>
               <span>•</span>
               <span>Open Source</span>
               <span>•</span>

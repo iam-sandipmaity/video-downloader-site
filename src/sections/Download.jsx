@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Package, Copy, Check, ExternalLink, Info, Clock } from 'lucide-react';
+import { Github, Package, Copy, Check, ExternalLink, Info, Clock, Download as DownloadIcon } from 'lucide-react';
 import { getLatestVersion } from '../utils/apkDataLoader';
 import { downloadOptions } from '../mock/data';
 
@@ -109,18 +109,30 @@ const Download = () => {
               </code>
             </div>
 
-            {/* Primary Download Button */}
-            <motion.a
-              href={latestVersion.links?.github || latestVersion.apkPath}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center space-x-2 w-full bg-white text-teal-600 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Github className="w-5 h-5" />
-              <span>Download on GitHub</span>
-            </motion.a>
+            {/* Download Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3">
+              <motion.a
+                href={latestVersion.links?.github || latestVersion.apkPath}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center space-x-2 flex-1 bg-white text-teal-600 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Github className="w-5 h-5" />
+                <span>GitHub Release</span>
+              </motion.a>
+              <motion.a
+                href={latestVersion.apkPath}
+                download
+                className="flex items-center justify-center space-x-2 flex-1 bg-white/20 backdrop-blur-sm text-white border border-white/40 py-4 rounded-lg font-semibold hover:bg-white/30 transition-colors shadow-lg"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <DownloadIcon className="w-5 h-5" />
+                <span>Direct Download</span>
+              </motion.a>
+            </div>
           </motion.div>
 
           {/* Download Options */}

@@ -67,13 +67,13 @@
 ## File Structure
 
 ```
-vid-download/
+video-downloader-site/
 │
 ├── public/apks/                    ← 📦 Your APK files go here
 │   ├── video-downloader-v1.0.0.apk
 │   └── video-downloader-v1.1.0.apk
 │
-└── app/frontend/src/
+└── src/
     │
     ├── apk-data/                   ← 📝 Your JSON files go here
     │   ├── template.json           ← Copy this for new versions

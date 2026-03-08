@@ -14,13 +14,13 @@ SHA256 is a cryptographic hash function that creates a unique "fingerprint" of y
 ### Single File
 
 ```powershell
-Get-FileHash -Algorithm SHA256 "F:\vid-download\app\frontend\public\apks\videodownloader-1.0.0.apk"
+Get-FileHash -Algorithm SHA256 "F:\video-downloader-site\public\apks\videodownloader-1.0.0.apk"
 ```
 
 ### Get Only the Hash (Clean Output)
 
 ```powershell
-Get-FileHash -Algorithm SHA256 "F:\vid-download\app\frontend\public\apks\videodownloader-1.0.0.apk" | Select-Object -ExpandProperty Hash
+Get-FileHash -Algorithm SHA256 "F:\video-downloader-site\public\apks\videodownloader-1.0.0.apk" | Select-Object -ExpandProperty Hash
 ```
 
 **Example Output:**
@@ -31,7 +31,7 @@ Get-FileHash -Algorithm SHA256 "F:\vid-download\app\frontend\public\apks\videodo
 ### Calculate for All APKs in Directory
 
 ```powershell
-Get-ChildItem "F:\vid-download\app\frontend\public\apks\*.apk" | Get-FileHash -Algorithm SHA256 | Format-Table Name, Hash -AutoSize
+Get-ChildItem "F:\video-downloader-site\public\apks\*.apk" | Get-FileHash -Algorithm SHA256 | Format-Table Name, Hash -AutoSize
 ```
 
 ## Linux / Mac
@@ -60,12 +60,12 @@ sha256sum /path/to/apks/*.apk
 
 2. **Open PowerShell** in the project directory:
    ```powershell
-   cd F:\vid-download
+   cd F:\video-downloader-site
    ```
 
 3. **Calculate the checksum**:
    ```powershell
-   Get-FileHash -Algorithm SHA256 "app\frontend\public\apks\videodownloader-1.1.0.apk" | Select-Object -ExpandProperty Hash
+   Get-FileHash -Algorithm SHA256 "public\apks\videodownloader-1.1.0.apk" | Select-Object -ExpandProperty Hash
    ```
 
 4. **Copy the hash** from the output
@@ -108,10 +108,10 @@ Then compare the output with the checksum shown on your website.
 
 ```powershell
 # 1. Navigate to project
-cd F:\vid-download
+cd F:\video-downloader-site
 
 # 2. Calculate checksum
-$hash = Get-FileHash -Algorithm SHA256 "app\frontend\public\apks\videodownloader-1.1.0.apk" | Select-Object -ExpandProperty Hash
+$hash = Get-FileHash -Algorithm SHA256 "public\apks\videodownloader-1.1.0.apk" | Select-Object -ExpandProperty Hash
 
 # 3. Display the hash
 Write-Host "SHA256: $hash"
@@ -156,5 +156,5 @@ If the calculated hash doesn't match what's expected:
 **Quick Reference:**
 ```powershell
 # Calculate SHA256 for your APK
-Get-FileHash -Algorithm SHA256 "app\frontend\public\apks\your-apk.apk" | Select-Object -ExpandProperty Hash
+Get-FileHash -Algorithm SHA256 "public\apks\your-apk.apk" | Select-Object -ExpandProperty Hash
 ```

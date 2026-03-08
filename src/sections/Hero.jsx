@@ -2,8 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Download, Github, Package, ArrowRight, Sparkles } from 'lucide-react';
 import DottedPattern from '../components/DottedPattern';
+import { getLatestVersion } from '../utils/apkDataLoader';
 
 const Hero = () => {
+  const latestVersion = getLatestVersion();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -178,7 +180,7 @@ const Hero = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <div className="px-2 py-1 bg-orange-100 dark:bg-orange-900/30 rounded text-orange-700 dark:text-orange-300 font-semibold text-xs">
-                  v1.0.0
+                  {latestVersion?.version ?? 'v1.0.0'}
                 </div>
               </div>
             </motion.div>

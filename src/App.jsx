@@ -7,6 +7,10 @@ import Home from './pages/Home';
 import Versions from './pages/Versions';
 import Docs from './pages/Docs';
 import Changelog from './pages/Changelog';
+import Privacy from './pages/Privacy';
+import License from './pages/License';
+import Contact from './pages/Contact';
+import DownloadPage from './pages/DownloadPage';
 import './App.css';
 
 function App() {
@@ -21,6 +25,10 @@ function App() {
               <Route path="/versions" element={<Versions />} />
               <Route path="/docs" element={<Docs />} />
               <Route path="/changelog" element={<Changelog />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/license" element={<License />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/download" element={<DownloadPage />} />
             </Routes>
           </main>
           <Footer />
