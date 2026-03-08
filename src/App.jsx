@@ -10,6 +10,7 @@ import Changelog from './pages/Changelog';
 import Privacy from './pages/Privacy';
 import License from './pages/License';
 import Contact from './pages/Contact';
+import DownloadPage from './pages/DownloadPage';
 import './App.css';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/license" element={<License />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/download" element={<DownloadPage />} />
             </Routes>
           </main>
           <Footer />
