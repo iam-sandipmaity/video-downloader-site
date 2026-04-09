@@ -8,13 +8,17 @@ const Docs = () => {
   const [selectedDoc, setSelectedDoc] = useState(docs[0]);
 
   const docCategories = {
-    'Getting Started': ['installation', 'usage'],
-    'Reference': ['ytdlp', 'troubleshooting', 'faq'],
+    'Getting Started': ['installation', 'usage', 'converter', 'compressor'],
+    'YouTube & Auth': ['ytdlp', 'youtube-auth'],
+    'Settings': ['settings', 'privacy'],
+    'Reference': ['troubleshooting', 'faq', 'roadmap'],
     'Development': ['build', 'contributing']
   };
 
   const categoryIcons = {
     'Getting Started': BookOpen,
+    'YouTube & Auth': HelpCircle,
+    'Settings': HelpCircle,
     'Reference': HelpCircle,
     'Development': Code
   };
@@ -118,35 +122,57 @@ const Docs = () => {
             <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-8">
               <article className="prose prose-gray dark:prose-invert max-w-none">
                 {selectedDoc.content.split('\n').map((line, index) => {
-                  // Headers
+                  // Headers - h1
                   if (line.startsWith('# ')) {
                     return (
-                      <h1 key={index} className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
+                      <h1 key={index} className="text-3xl font-bold mb-6 text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-3">
                         {line.substring(2)}
                       </h1>
                     );
                   }
+                  // Headers - h2
                   if (line.startsWith('## ')) {
                     return (
-                      <h2 key={index} id={`heading-${index}`} className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white scroll-mt-24">
+                      <h2 key={index} id={`heading-${index}`} className="text-2xl font-bold mt-10 mb-4 text-gray-900 dark:text-white scroll-mt-24 flex items-center">
+                        <span className="w-1 h-8 bg-teal-500 rounded-full mr-3"></span>
                         {line.substring(3)}
                       </h2>
+                    );
+                  }
+                  // Headers - h3
+                  if (line.startsWith('### ')) {
+                    return (
+                      <h3 key={index} className="text-xl font-semibold mt-8 mb-3 text-gray-800 dark:text-gray-200">
+                        {line.substring(4)}
+                      </h3>
+                    );
+                  }
+                  // Headers - h4
+                  if (line.startsWith('#### ')) {
+                    return (
+                      <h4 key={index} className="text-lg font-semibold mt-6 mb-2 text-gray-700 dark:text-gray-300">
+                        {line.substring(5)}
+                      </h4>
                     );
                   }
                   
                   // Bold questions
                   if (line.startsWith('**Q:')) {
                     return (
-                      <p key={index} className="font-semibold text-gray-900 dark:text-white mt-4 mb-2">
-                        {line.replace(/\*\*/g, '')}
-                      </p>
+                      <div key={index} className="bg-teal-50 dark:bg-teal-900/20 border-l-4 border-teal-500 px-4 py-3 rounded-r-lg my-4">
+                        <p className="font-bold text-teal-800 dark:text-teal-200">
+                          {line.replace(/\*\*/g, '')}
+                        </p>
+                      </div>
                     );
                   }
                   if (line.startsWith('**A:')) {
                     return (
-                      <p key={index} className="text-gray-700 dark:text-gray-300 mb-4">
-                        {line.replace(/\*\*/g, '')}
-                      </p>
+                      <div key={index} className="bg-gray-50 dark:bg-gray-900/50 px-4 py-3 rounded-lg my-2 ml-4">
+                        <p className="text-gray-700 dark:text-gray-300">
+                          {line.replace(/\*\*/g, '')}
+                        </p>
+                      </div>
                     );
                   }
                   
@@ -154,11 +180,45 @@ const Docs = () => {
                   if (line.startsWith('```')) {
                     return null;
                   }
-                  if (line.startsWith('git clone') || line.startsWith('cd ')) {
+                  if (line.startsWith('git clone') || line.startsWith('cd ') || line.startsWith('./gradlew') || line.startsWith('gradlew')) {
                     return (
-                      <pre key={index} className="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg my-4 overflow-x-auto">
-                        <code className="text-sm text-gray-800 dark:text-gray-200">{line}</code>
+                      <pre key={index} className="bg-gray-900 dark:bg-gray-950 p-4 rounded-lg my-4 overflow-x-auto border border-gray-700">
+                        <code className="text-sm text-green-400 font-mono">{line}</code>
                       </pre>
+                    );
+                  }
+                  
+                  // Bold inline text
+                  if (line.includes('**') && !line.startsWith('**Q:') && !line.startsWith('**A:')) {
+                    const parts = line.split(/(\*\*[^*]+\*\*)/g);
+                    return (
+                      <p key={index} className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+                        {parts.map((part, i) => {
+                          if (part.startsWith('**') && part.endsWith('**')) {
+                            return <strong key={i} className="font-bold text-teal-600 dark:text-teal-400">{part.slice(2, -2)}</strong>;
+                          }
+                          // Check for links in this part
+                          const linkRegex = /(https?:\/\/[^\s]+)/g;
+                          if (linkRegex.test(part)) {
+                            const linkParts = part.split(linkRegex);
+                            return (
+                              <span key={i}>
+                                {linkParts.map((lp, j) => {
+                                  if (lp.match(linkRegex)) {
+                                    return (
+                                      <a key={j} href={lp} target="_blank" rel="noopener noreferrer" className="text-teal-600 dark:text-teal-400 hover:underline">
+                                        {lp}
+                                      </a>
+                                    );
+                                  }
+                                  return lp;
+                                })}
+                              </span>
+                            );
+                          }
+                          return part;
+                        })}
+                      </p>
                     );
                   }
                   
@@ -199,14 +259,16 @@ const Docs = () => {
                   // Lists
                   if (line.startsWith('- ')) {
                     return (
-                      <li key={index} className="text-gray-700 dark:text-gray-300 ml-6 mb-2">
+                      <li key={index} className="text-gray-700 dark:text-gray-300 ml-6 mb-2 flex items-start">
+                        <span className="text-teal-500 mr-2 mt-1">•</span>
                         {line.substring(2)}
                       </li>
                     );
                   }
                   if (line.match(/^\d+\./)) {
                     return (
-                      <li key={index} className="text-gray-700 dark:text-gray-300 ml-6 mb-2">
+                      <li key={index} className="text-gray-700 dark:text-gray-300 ml-6 mb-2 flex items-start">
+                        <span className="text-teal-600 dark:text-teal-400 font-bold mr-2">{line.substring(0, line.indexOf('.'))}</span>
                         {line.substring(line.indexOf('.') + 2)}
                       </li>
                     );
