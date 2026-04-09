@@ -1,0 +1,42 @@
+{
+  "version": "v1.4.0",
+  "publishDate": "2026-04-09",
+  "fileSize": "282 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-23/video-downloader-v1.3.0-debug.apk",
+  "sha256": "7b6a0e8521606d2c868d9c416c820fa8112c8b7b61e09072f701ba8eeeffff26",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly-23",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-23/video-downloader-v1.3.0-debug.apk"
+  },
+  "changelog": {
+    "added": [
+      "Download button state management — button disables after click to prevent duplicate downloads, shows 'Please wait...' with faded appearance, re-enables on setting changes or 6-second timeout",
+      "Cache management in Settings — displays current cache size with clear button to free up storage",
+      "Enhanced Help Screen — comprehensive documentation covering Downloads, Converter, Compressor, Navigation tabs, Settings, Troubleshooting, and About sections",
+      "YouTube DASH video+audio download support — improved format selection for higher resolution downloads",
+      "Artifact cleanup workflow — GitHub Actions workflow automatically deletes artifacts older than 2 days"
+    ],
+    "fixed": [
+      "Cookie auth bug — cookies were not being applied for age-gated YouTube content without PO tokens",
+      "Output file visibility — converted and compressed files now accessible via file managers",
+      "Download state clarity — users can now clearly see when download button is disabled vs enabled",
+      "FFmpeg progress parsing — removed duplicate code, now uses shared FfmpegProgressParser"
+    ],
+    "improved": [
+      "YouTube cookie authentication — cookies now applied when YouTube auth is enabled OR PO token is provided",
+      "Converter output location — converted files copied to public Downloads/LocalDownloader folder",
+      "Compressor output location — compressed files copied to public Downloads/LocalDownloader folder",
+      "Help page — completely rewritten with much more detailed information"
+    ],
+    "removed": [
+      "Custom update() function in MediaToolsViewModel — now uses proper kotlinx.coroutines.flow.update"
+    ],
+    "comingSoon": [
+      "Embedded terminal for custom yt-dlp commands",
+      "YouTube DASH higher resolution downloads (720p, 1080p, etc.)",
+      "Compressor improvements with presets and estimated size",
+      "App size optimization"
+    ]
+  }
+}
