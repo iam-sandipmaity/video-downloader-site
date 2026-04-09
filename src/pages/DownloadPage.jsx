@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Github, Package, Copy, Check, ExternalLink, Info, Clock, Download as DownloadIcon, Shield, Smartphone, ArrowRight } from 'lucide-react';
+import { Github, Package, Copy, Check, ExternalLink, Info, Clock, Download as DownloadIcon, Shield, Smartphone, ArrowRight, Cpu, HardDrive, Globe, Zap, FileVideo, Headphones } from 'lucide-react';
 import { getLatestVersion, loadApkData } from '../utils/apkDataLoader';
-import { downloadOptions } from '../mock/data';
+import { features } from '../mock/data';
 
 const steps = [
   {
@@ -21,6 +21,18 @@ const steps = [
     title: 'Install & Launch',
     description: 'Open the downloaded APK, tap Install, then open Video Downloader and start downloading.',
   },
+];
+
+const systemRequirements = [
+  { icon: Smartphone, label: 'Android 8.0+ (API 26)', desc: 'Oreo and above' },
+  { icon: HardDrive, label: '4GB+ Storage', desc: 'For app and downloads' },
+  { icon: Globe, label: 'Internet Required', desc: 'For downloading' },
+  { icon: Cpu, label: '64-bit CPU', desc: 'ARM64 (arm64-v8a)' },
+];
+
+const supportedFormats = [
+  { icon: FileVideo, label: 'Video', formats: 'MP4, MKV, WebM, AVI, MOV' },
+  { icon: Headphones, label: 'Audio', formats: 'MP3, AAC, FLAC, WAV, OPUS' },
 ];
 
 const DownloadPage = () => {
@@ -64,12 +76,46 @@ const DownloadPage = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-6xl">
 
+        {/* System Requirements */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
+        >
+          {systemRequirements.map((req, i) => (
+            <div key={i} className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 text-center border border-gray-100 dark:border-gray-700">
+              <req.icon className="w-6 h-6 text-teal-600 dark:text-teal-400 mx-auto mb-2" />
+              <div className="font-semibold text-gray-900 dark:text-white text-sm">{req.label}</div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">{req.desc}</div>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Supported Formats */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="flex flex-wrap justify-center gap-6 mb-12"
+        >
+          {supportedFormats.map((fmt, i) => (
+            <div key={i} className="flex items-center space-x-3 bg-gray-50 dark:bg-gray-800/50 px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700">
+              <fmt.icon className="w-5 h-5 text-teal-600 dark:text-teal-400" />
+              <div className="text-sm">
+                <span className="font-medium text-gray-900 dark:text-white">{fmt.label}:</span>{' '}
+                <span className="text-gray-600 dark:text-gray-400">{fmt.formats}</span>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+
         {/* Latest version card */}
         {latestVersion ? (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="grid lg:grid-cols-3 gap-8 mb-16"
           >
             {/* Main card */}
@@ -86,6 +132,15 @@ const DownloadPage = () => {
                   <div className="text-sm text-white/80 mb-1">File Size</div>
                   <div className="text-2xl font-bold">{latestVersion.fileSize}</div>
                 </div>
+              </div>
+
+              {/* Quick features */}
+              <div className="flex flex-wrap gap-2 mb-6">
+                {['yt-dlp powered', 'FFmpeg included', 'No ads', 'Open source'].map((tag, i) => (
+                  <span key={i} className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-medium">
+                    {tag}
+                  </span>
+                ))}
               </div>
 
               {/* SHA256 */}
@@ -136,42 +191,27 @@ const DownloadPage = () => {
 
             {/* Download options sidebar */}
             <div className="space-y-4">
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-4">Download Options</h3>
-              {downloadOptions.map((option) => {
-                const iconMap = { Github, Package };
-                const IconComponent = iconMap[option.icon] || Github;
-                const isComingSoon = option.comingSoon;
-                return (
-                  <motion.a
-                    key={option.id}
-                    href={isComingSoon ? undefined : option.link}
-                    target={isComingSoon ? undefined : '_blank'}
-                    rel={isComingSoon ? undefined : 'noopener noreferrer'}
-                    onClick={isComingSoon ? (e) => e.preventDefault() : undefined}
-                    className={`flex items-start space-x-3 p-4 rounded-lg border transition-all group ${
-                      isComingSoon
-                        ? 'bg-gray-50 dark:bg-gray-800/50 border-dashed border-gray-300 dark:border-gray-700 cursor-not-allowed opacity-60'
-                        : 'bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-teal-500 dark:hover:border-teal-500 cursor-pointer'
-                    }`}
-                    whileHover={isComingSoon ? {} : { x: 4 }}
-                  >
-                    <IconComponent className={`w-5 h-5 mt-0.5 transition-colors ${isComingSoon ? 'text-gray-400' : 'text-gray-600 dark:text-gray-400 group-hover:text-teal-600 dark:group-hover:text-teal-400'}`} />
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-0.5">
-                        <h5 className="font-medium text-gray-900 dark:text-white text-sm">{option.name}</h5>
-                        {isComingSoon && (
-                          <span className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-xs font-medium">
-                            <Clock className="w-3 h-3" />
-                            <span>Coming Soon</span>
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">{option.description}</p>
-                    </div>
-                    {!isComingSoon && <ExternalLink className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity mt-0.5" />}
-                  </motion.a>
-                );
-              })}
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                <Zap className="w-5 h-5 text-teal-600 dark:text-teal-400 mr-2" />
+                Download Options
+              </h3>
+              {features.slice(0, 4).map((feature) => (
+                <div key={feature.id} className="flex items-start space-x-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700">
+                  <div className="w-8 h-8 bg-teal-100 dark:bg-teal-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Zap className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                  </div>
+                  <div>
+                    <h5 className="font-medium text-gray-900 dark:text-white text-sm">{feature.title}</h5>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">{feature.description}</p>
+                  </div>
+                </div>
+              ))}
+              <Link
+                to="/docs"
+                className="block text-center text-sm text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors"
+              >
+                View all features →
+              </Link>
             </div>
           </motion.div>
         ) : (
@@ -182,22 +222,22 @@ const DownloadPage = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
           className="mb-16"
         >
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">How to Install</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">How to Install</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {steps.map((s, i) => (
-              <div key={s.step} className="relative flex md:flex-col gap-4">
+              <div key={s.step} className="relative flex md:flex-col gap-4 p-6 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700">
                 <div className="flex-shrink-0 w-12 h-12 bg-teal-100 dark:bg-teal-900/30 rounded-xl flex items-center justify-center">
                   <span className="text-teal-600 dark:text-teal-400 font-bold text-sm">{s.step}</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">{s.title}</h3>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{s.title}</h3>
                   <p className="text-sm text-gray-600 dark:text-gray-400">{s.description}</p>
                 </div>
                 {i < steps.length - 1 && (
-                  <ArrowRight className="hidden md:block absolute top-3 -right-3 w-5 h-5 text-gray-300 dark:text-gray-600" />
+                  <ArrowRight className="hidden md:block absolute top-1/2 -right-3 w-5 h-5 text-gray-300 dark:text-gray-600 transform -translate-y-1/2" />
                 )}
               </div>
             ))}
@@ -208,7 +248,7 @@ const DownloadPage = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.4 }}
           className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-5 mb-16"
         >
           <div className="flex space-x-3">
@@ -228,7 +268,7 @@ const DownloadPage = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35, duration: 0.6 }}
+            transition={{ delay: 0.45, duration: 0.6 }}
           >
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white">All Versions</h2>
