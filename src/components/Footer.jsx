@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Github, Heart, Download } from 'lucide-react';
+import { Github, Heart, Download, Twitter, Linkedin, Instagram } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -9,12 +9,13 @@ const Footer = () => {
     Product: [
       { name: 'Download', path: '/#download' },
       { name: 'Versions', path: '/versions' },
-      { name: 'Changelog', path: '/changelog' }
+      { name: 'Changelog', path: '/changelog' },
+      { name: 'Documentation', path: '/docs' }
     ],
     Resources: [
-      { name: 'Documentation', path: '/docs' },
       { name: 'GitHub', path: 'https://github.com/iam-sandipmaity/video-downloader', external: true },
-      { name: 'F-Droid', path: 'https://f-droid.org/', external: true }
+      { name: 'F-Droid', path: 'https://f-droid.org/', external: true },
+      { name: 'Report Bug', path: 'https://github.com/iam-sandipmaity/video-downloader/issues', external: true }
     ],
     Legal: [
       { name: 'Privacy Policy', path: '/privacy' },
@@ -22,6 +23,13 @@ const Footer = () => {
       { name: 'Contact', path: '/contact' }
     ]
   };
+
+  const socialLinks = [
+    { name: 'GitHub', icon: Github, href: 'https://github.com/iam-sandipmaity', color: 'hover:text-white' },
+    { name: 'X (Twitter)', icon: Twitter, href: 'https://x.com/iam_sandipmaity', color: 'hover:text-black' },
+    { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/in/iam-sandipmaity', color: 'hover:text-blue-500' },
+    { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/iam_sandipmaity', color: 'hover:text-pink-500' }
+  ];
 
   return (
     <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
@@ -40,6 +48,29 @@ const Footer = () => {
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 max-w-sm">
               Open-source Android video downloader powered by yt-dlp. Download videos from thousands of websites with ease.
             </p>
+            
+            {/* Social Links */}
+            <div className="flex items-center space-x-4 mb-4">
+              <span className="text-sm text-gray-500 dark:text-gray-400">Follow the developer:</span>
+              <div className="flex items-center space-x-3">
+                {socialLinks.map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <a
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`w-9 h-9 flex items-center justify-center rounded-lg bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 ${social.color} transition-all hover:scale-110`}
+                      title={social.name}
+                    >
+                      <Icon className="w-4 h-4" />
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+            
             <a
               href="https://github.com/iam-sandipmaity/video-downloader"
               target="_blank"
@@ -91,7 +122,8 @@ const Footer = () => {
               <span>© {currentYear} Video Downloader App.</span>
               <span>Built with</span>
               <Heart className="w-4 h-4 text-red-500 fill-current" />
-              <span>by the community</span>
+              <span>by</span>
+              <a href="https://linkedin.com/in/iam-sandipmaity" target="_blank" rel="noopener noreferrer" className="text-teal-600 dark:text-teal-400 hover:underline">Sandip Maity</a>
             </p>
             <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
               <Link to="/license" className="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">MIT License</Link>
