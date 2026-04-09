@@ -224,6 +224,7 @@ const Hero = () => {
                   <img
                     src="/images/app-mockup.svg"
                     alt="Video Downloader App Mockup"
+                    loading="lazy"
                     className="relative w-80 h-auto rounded-[3rem] shadow-2xl border-8 border-gray-900 dark:border-gray-700"
                   />
                   
