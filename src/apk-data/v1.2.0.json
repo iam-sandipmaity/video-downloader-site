@@ -1,0 +1,41 @@
+{
+  "version": "v1.2.0",
+  "publishDate": "2026-04-05",
+  "fileSize": "272 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-8/video-downloader-v1.2.0-debug.apk",
+  "sha256": "4d2f2b1f6130bf08fce5f71e34bf4ce465ba525056bcf9600e292b92e23cce48",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly-8",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-8/video-downloader-v1.2.0-debug.apk"
+  },
+  "changelog": {
+    "added": [
+      "Room database for persistent download queue and history — tasks and completed downloads survive app kills and restarts",
+      "Dark theme support — toggle light/dark appearance in Settings with saved preference",
+      "WorkManager exponential backoff — transient network failures and CDN 403s retry with automatic backoff",
+      "R8 shrinking + minification — release builds are now minified and shrunk with comprehensive ProGuard rules",
+      "Media scan on download completion — files copied to public Downloads/LocalDownloader folder on Android 11+",
+      "JSON caching of download options in Room for reliable resume after app restarts"
+    ],
+    "fixed": [
+      "Kotlin serialization compatibility — aligned kotlinx-serialization-json to 1.6.3 for Kotlin 1.9.24",
+      "CameraX import accidentally left in MainActivity",
+      "Missing File import in DownloadWorker",
+      "Worker suspend calls to DownloadTaskStore resolved by making operations non-suspending",
+      "Incorrect import paths for WorkerKeys and DownloadTaskStore internal modules"
+    ],
+    "improved": [
+      "Scoped Storage compliance — removed deprecated getExternalStoragePublicDirectory for Android 10",
+      "Removed use-case layer — replaced with direct repository calls for simpler code",
+      "Non-blocking task store — in-memory MutableStateFlow persists to Room asynchronously",
+      "Log privacy — removed external storage log mirrors, logs now write only to internal storage"
+    ],
+    "removed": [],
+    "comingSoon": [
+      "Download button state management",
+      "Cache clearing in settings",
+      "Enhanced help screen documentation"
+    ]
+  }
+}
