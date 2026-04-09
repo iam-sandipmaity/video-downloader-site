@@ -1,0 +1,31 @@
+{
+  "version": "v1.3.0",
+  "publishDate": "2026-04-06",
+  "fileSize": "279 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-16/video-downloader-v1.3.0-debug.apk",
+  "sha256": "255c1b0ed2e146c5b1fa7ee30312d2fd7e2c9a51db1cb87fdbbe7246fd6859be",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly-16",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-16/video-downloader-v1.3.0-debug.apk"
+  },
+  "changelog": {
+    "added": [
+      "Progress indicator during URL analysis — LinearProgressIndicator bar appears while yt-dlp fetches video info",
+      "Stable signing architecture hooks — Gradle and GitHub Actions can now use persistent debug/release keystores"
+    ],
+    "fixed": [
+      "APK update conflict — same applicationId retained with incremented versionCode so new APKs install over old ones"
+    ],
+    "improved": [
+      "YouTube download quality locked to 360p — downloads without manual selection capped at 360p",
+      "YouTube extraction simplified — removed 4-client extractor retry loop, single default yt-dlp call used"
+    ],
+    "removed": [],
+    "comingSoon": [
+      "Download button state management",
+      "Cache clearing in settings",
+      "Enhanced help screen documentation"
+    ]
+  }
+}
