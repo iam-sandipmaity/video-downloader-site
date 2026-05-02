@@ -1,0 +1,44 @@
+{
+  "version": "v1.5.0",
+  "publishDate": "2026-05-01",
+  "fileSize": "282.5 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-24/video-downloader-v1.5.0-debug.apk",
+  "sha256": "8984f746a0c0a9301e52b9b49563e528fb216f0f9423979944f663cb990c34a3",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly-24",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-24/video-downloader-v1.5.0-debug.apk"
+  },
+  "changelog": {
+    "added": [
+      "Modern in-app player upgrade with a rebuilt fullscreen UI, double-tap seek controls, playback speed selector, audio and subtitle track selection, resize modes, touch lock, and cleaner buffering/seek overlays",
+      "Playback stability and resume upgrades with better lifecycle preservation, session-based resume for previously opened media, and dedicated player state management",
+      "Picture-in-Picture support with a visible PiP button in the player controls",
+      "External open support for local video and audio files, GIF and image previews, and HTML, MHTML, and MHT web previews inside the app",
+      "Shared link handling - the app now appears in Android's share sheet for links, opens shared links directly in Browser, and auto-fills plus analyzes shared URLs",
+      "Media library sync and cleanup controls, including auto-remove missing files, optional device deletion, Remove from app cleanup, and Delete all media cleanup"
+    ],
+    "fixed": [
+      "Fixed playlist downloads failing in background while single downloads worked",
+      "Fixed worker completion cases where playlist items failed with no explicit worker error",
+      "Fixed player controls not fading properly in paused state",
+      "Fixed GIF downloads failing during post-processing with invalid input data",
+      "Fixed media library entries staying visible after files were deleted externally",
+      "Fixed Browser analyzed state being harder to dismiss once media was ready",
+      "Fixed the app not appearing in normal link sharing flows",
+      "Fixed player compile issues from earlier control and annotation changes",
+      "Fixed the Picture-in-Picture icon placeholder by replacing it with a proper icon"
+    ],
+    "improved": [
+      "Playlist downloads are now more resilient in background execution, with better worker handling for long-running queues and more reliable item-by-item continuation",
+      "GIF and image-like downloads no longer go through unnecessary media post-processing, avoiding failures after 100% download",
+      "Player interaction polish - controls fade in place, paused-state controls dismiss correctly, and video viewing now supports pinch-to-zoom, pan, and reset zoom",
+      "Browser UX improvements for Ready to download content, including clearer dismiss and direct clear actions from the Browser tab",
+      "Progress queue ordering now matches top-to-bottom download flow more clearly",
+      "Quick links received a visual refresh with cleaner, better-matched platform logos",
+      "Technical foundations improved with PlayerViewModel, PlaybackSessionStore, ExternalOpenRequest, ExternalPreviewScreen, expanded FileUtils support, coil-gif, and new intent filters for sharing, web links, supported file opens, and MHTML or MHT previews"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}
