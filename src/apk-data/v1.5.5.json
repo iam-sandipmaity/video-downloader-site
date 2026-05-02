@@ -1,0 +1,26 @@
+{
+  "version": "v1.5.5",
+  "publishDate": "2026-05-02",
+  "fileSize": "283 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-31/video-downloader-v1.5.5-debug.apk",
+  "sha256": "7931cd11f19746c68c3a3c9edf61788d7ef5c34419548967a58309c182195637",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly-31",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-31/video-downloader-v1.5.5-debug.apk"
+  },
+  "changelog": {
+    "added": [],
+    "fixed": [
+      "True pause behavior - pausing a download now stops the active worker without turning the task into an immediate cancel, keeps the same task entry for resume, and preserves partial progress for up to 10 minutes",
+      "Pause expiry cleanup - paused downloads now expire after 10 minutes, show a clear expiry message, and automatically remove cached partial download artifacts"
+    ],
+    "improved": [
+      "Progress tab cleanup - logs are no longer shown in the Progress page, which now focuses on queue state, resume timing, and primary actions",
+      "History log viewer - full task logs are now available from History through a cleaner dedicated log dialog",
+      "Release metadata updated to v1.5.5"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}

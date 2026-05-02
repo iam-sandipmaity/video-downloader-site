@@ -1,0 +1,26 @@
+{
+  "version": "v1.5.7-beta",
+  "publishDate": "2026-05-02",
+  "fileSize": "144 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-38/video-downloader-v1.5.7-beta-debug.apk",
+  "sha256": "cc34b022b2e8c3ad22d56325442227bab13ec18d6629d802e663403572c68170",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly-38",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-38/video-downloader-v1.5.7-beta-debug.apk"
+  },
+  "changelog": {
+    "added": [],
+    "fixed": [
+      "yt-dlp launch fallback - download commands now retry with the asset-installed yt-dlp binary when the packaged native executable cannot start, and still fall back to the embedded runtime if standalone execution fails",
+      "FFmpeg launch fallback - conversion and compression now retry with the asset-installed ffmpeg binary when the packaged native executable is unavailable or not executable"
+    ],
+    "improved": [
+      "Runtime cleanup on startup - redundant extracted tool artifacts are now removed in the background when packaged native binaries are present",
+      "ABI packaging scope - the current beta build is now packaged for arm64-v8a",
+      "Release metadata updated to v1.5.7-beta"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}

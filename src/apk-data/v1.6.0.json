@@ -1,0 +1,25 @@
+{
+  "version": "v1.6.0",
+  "publishDate": "2026-05-02",
+  "fileSize": "82.9 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-39/video-downloader-v1.6.0-debug.apk",
+  "sha256": "c0f837199862b963b6b648612839cbc42632cd7155ff99224c2612fcd2279878",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly-39",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-39/video-downloader-v1.6.0-debug.apk"
+  },
+  "changelog": {
+    "added": [],
+    "fixed": [],
+    "improved": [
+      "Embedded yt-dlp runtime - downloads now rely on the built-in youtubedl-android runtime instead of packaging separate standalone yt-dlp binaries in assets and jniLibs",
+      "FFmpeg-only bundled binary validation - CI checks and compatibility docs now focus on the ffmpeg binary paths that are still shipped with the app",
+      "Release metadata updated to v1.6.0"
+    ],
+    "removed": [
+      "Standalone yt-dlp artifacts - removed the unused asset and native-library copies of yt-dlp to reduce release packaging overhead"
+    ],
+    "comingSoon": []
+  }
+}

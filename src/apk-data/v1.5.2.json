@@ -1,0 +1,24 @@
+{
+  "version": "v1.5.2",
+  "publishDate": "2026-05-02",
+  "fileSize": "283 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-27/video-downloader-v1.5.2-debug.apk",
+  "sha256": "f32832353714cf2660379d7cb03a42056db6d14a2cd2e62bcef1f3fd1e85537c",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly-27",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-27/video-downloader-v1.5.2-debug.apk"
+  },
+  "changelog": {
+    "added": [
+      "Horizontal swipe seek - swipe left or right across the player to preview and jump backward or forward on release, with skip distance based on swipe length and video duration"
+    ],
+    "fixed": [],
+    "improved": [
+      "In-player gesture guidance now explains both horizontal seek and vertical brightness and volume swipes",
+      "Release metadata updated to v1.5.2"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}

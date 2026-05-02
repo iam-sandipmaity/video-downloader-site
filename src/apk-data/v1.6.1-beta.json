@@ -1,0 +1,26 @@
+{
+  "version": "v1.6.1-beta",
+  "publishDate": "2026-05-02",
+  "fileSize": "82.9 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-41/video-downloader-v1.6.1-beta-debug.apk",
+  "sha256": "35cea7ece2719260d0d0c47785d1b7700bf518e49ef98b0f9eca902a85a97b07",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly-41",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-41/video-downloader-v1.6.1-beta-debug.apk"
+  },
+  "changelog": {
+    "added": [],
+    "fixed": [
+      "Subtitle download reliability - subtitle-enabled downloads now request both standard and auto-generated captions, then convert saved subtitle files to SRT for broader device and player compatibility",
+      "Subtitle file visibility - downloaded subtitle sidecars are now exported to the public Downloads/LocalDownloader folder alongside the main media file instead of being left in app-private storage",
+      "Local subtitle playback - the in-app player now attaches subtitle files stored next to the video so downloaded captions appear as playable subtitle tracks for offline media too",
+      "Split-download subtitle support - when a video is downloaded as separate video and audio streams and merged locally, subtitle sidecars are now fetched for the merged output as a follow-up step"
+    ],
+    "improved": [
+      "Release metadata updated to v1.6.1-beta"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}

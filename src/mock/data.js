@@ -5,10 +5,10 @@ export const appInfo = {
   tagline: "Download videos from almost any supported platform — powered by yt-dlp.",
   description: "A powerful, open-source Android application built with Kotlin that lets you download videos from YouTube, X, Facebook, Reddit, Instagram and more. Features FFmpeg for seamless video+audio merging, transcoding and post-processing.",
   github: "https://github.com/iam-sandipmaity/video-downloader",
-  version: "v1.4.0",
-  releaseDate: "2026-04-09",
-  fileSize: "282 MB",
-  sha256: "7b6a0e8521606d2c868d9c416c820fa8112c8b7b61e09072f701ba8eeeffff26"
+  version: "v1.6.1-beta",
+  releaseDate: "2026-05-02",
+  fileSize: "82.9 MB",
+  sha256: "35cea7ece2719260d0d0c47785d1b7700bf518e49ef98b0f9eca902a85a97b07"
 };
 
 export const features = [
@@ -82,6 +82,32 @@ export const downloadOptions = [
 ];
 
 export const versions = [
+  {
+    version: "v1.5.0",
+    date: "2026-05-01",
+    size: "282.5 MB",
+    sha256: "8984f746a0c0a9301e52b9b49563e528fb216f0f9423979944f663cb990c34a3",
+    changelog: {
+      added: [
+        "Modern in-app player redesign with better controls, playback speed, track selection, and resize modes",
+        "Picture-in-Picture support and broader external open support",
+        "Shared link handling from Android share sheet",
+        "Media library sync and cleanup controls"
+      ],
+      fixed: [
+        "Background playlist download failures",
+        "GIF post-processing failures",
+        "Player control fade issues",
+        "Stale media library entries after external file deletion"
+      ],
+      improved: [
+        "Playlist reliability in background execution",
+        "Browser ready-to-download dismissal flow",
+        "Progress queue clarity and quick-link visuals"
+      ],
+      removed: []
+    }
+  },
   {
     version: "v1.4.0",
     date: "2026-04-09",
@@ -733,7 +759,7 @@ For release builds you need a signing keystore. Create one in Android Studio via
 
 Before building, check and update the version in gradle.properties:
 
-APP_VERSION_NAME=1.4.0
+APP_VERSION_NAME=1.5.0
 
 ## Running Tests
 
@@ -930,7 +956,7 @@ This document outlines the planned features and improvements for Video Downloade
 
 ### Phase 4: App Size Optimization (Long-term)
 
-**Current APK Size:** ~282 MB (includes yt-dlp, FFmpeg, Python runtime)
+**Current APK Size:** ~282.5 MB (includes yt-dlp, FFmpeg, Python runtime)
 
 **Optimization Strategies:**
 
@@ -943,7 +969,7 @@ This document outlines the planned features and improvements for Video Downloade
 | Enable R8 aggressive minification | 2-3 MB |
 | Use App Bundle (split APKs) | User downloads less |
 
-**Target:** Reduce from ~282 MB to ~200 MB APK
+**Target:** Reduce from ~282.5 MB to ~200 MB APK
 
 **Status:** 📋 Planned
 

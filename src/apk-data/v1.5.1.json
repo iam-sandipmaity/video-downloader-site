@@ -1,0 +1,23 @@
+{
+  "version": "v1.5.1",
+  "publishDate": "2026-05-02",
+  "fileSize": "283 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-26/video-downloader-v1.5.1-debug.apk",
+  "sha256": "aa4cd2fd92d3592718b8f164755eeef80e4951febc9d1131e99649295dff03c5",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly-26",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-26/video-downloader-v1.5.1-debug.apk"
+  },
+  "changelog": {
+    "added": [
+      "Modern player swipe controls - swipe up or down on the left side of the player to adjust brightness, or on the right side to adjust volume, with an on-screen hint and level indicator"
+    ],
+    "fixed": [],
+    "improved": [
+      "Release metadata updated to v1.5.1"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}

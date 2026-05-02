@@ -1,0 +1,25 @@
+{
+  "version": "v1.5.3",
+  "publishDate": "2026-05-02",
+  "fileSize": "283 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-28/video-downloader-v1.5.3-debug.apk",
+  "sha256": "5a947246a23bbcd82e3f5b49912fe8db01dc12c7b5b12c35570cbcf4df7eba0d",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly-28",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-28/video-downloader-v1.5.3-debug.apk"
+  },
+  "changelog": {
+    "added": [
+      "Background audio playback - music and other audio-first files can keep playing when the app moves to the background"
+    ],
+    "fixed": [
+      "Rotation lock behavior - the player lock now only locks screen rotation instead of blocking playback controls, gestures, panels, and other player actions"
+    ],
+    "improved": [
+      "Release metadata updated to v1.5.3"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}

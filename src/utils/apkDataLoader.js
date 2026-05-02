@@ -11,6 +11,106 @@
 // Import all JSON files from apk-data directory (Vite glob import)
 const apkModules = import.meta.glob('../apk-data/*.json', { eager: true });
 
+const parseVersion = (versionString) => {
+  const match = /^v?(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Za-z.-]+))?$/.exec(versionString ?? '');
+
+  if (!match) {
+    return null;
+  }
+
+  const [, major, minor, patch, prerelease = ''] = match;
+
+  return {
+    major: Number(major),
+    minor: Number(minor),
+    patch: Number(patch),
+    prerelease,
+  };
+};
+
+const comparePrerelease = (aPrerelease, bPrerelease) => {
+  if (!aPrerelease && !bPrerelease) {
+    return 0;
+  }
+
+  if (!aPrerelease) {
+    return 1;
+  }
+
+  if (!bPrerelease) {
+    return -1;
+  }
+
+  const aParts = aPrerelease.split('.');
+  const bParts = bPrerelease.split('.');
+  const maxLength = Math.max(aParts.length, bParts.length);
+
+  for (let i = 0; i < maxLength; i += 1) {
+    const aPart = aParts[i];
+    const bPart = bParts[i];
+
+    if (aPart === undefined) {
+      return -1;
+    }
+
+    if (bPart === undefined) {
+      return 1;
+    }
+
+    const aIsNumeric = /^\d+$/.test(aPart);
+    const bIsNumeric = /^\d+$/.test(bPart);
+
+    if (aIsNumeric && bIsNumeric) {
+      const diff = Number(aPart) - Number(bPart);
+      if (diff !== 0) {
+        return diff;
+      }
+      continue;
+    }
+
+    if (aIsNumeric) {
+      return -1;
+    }
+
+    if (bIsNumeric) {
+      return 1;
+    }
+
+    const diff = aPart.localeCompare(bPart);
+    if (diff !== 0) {
+      return diff;
+    }
+  }
+
+  return 0;
+};
+
+const compareVersions = (aVersion, bVersion) => {
+  const a = parseVersion(aVersion);
+  const b = parseVersion(bVersion);
+
+  if (!a || !b) {
+    return (aVersion ?? '').localeCompare(bVersion ?? '');
+  }
+
+  const majorDiff = a.major - b.major;
+  if (majorDiff !== 0) {
+    return majorDiff;
+  }
+
+  const minorDiff = a.minor - b.minor;
+  if (minorDiff !== 0) {
+    return minorDiff;
+  }
+
+  const patchDiff = a.patch - b.patch;
+  if (patchDiff !== 0) {
+    return patchDiff;
+  }
+
+  return comparePrerelease(a.prerelease, b.prerelease);
+};
+
 /**
  * Check if a version object is valid
  * @param {Object} version - Version object to validate
@@ -70,11 +170,17 @@ export const loadApkData = () => {
       })
       .filter(data => data !== null && isValidVersion(data));
 
-    // Sort by publish date (newest first)
+    // Sort by publish date first, then by semantic version when dates match.
     return apkData.sort((a, b) => {
       const dateA = new Date(a.publishDate);
       const dateB = new Date(b.publishDate);
-      return dateB - dateA;
+      const dateDiff = dateB - dateA;
+
+      if (dateDiff !== 0) {
+        return dateDiff;
+      }
+
+      return compareVersions(b.version, a.version);
     });
   } catch (error) {
     console.error('Error loading APK data:', error);

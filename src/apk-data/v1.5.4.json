@@ -1,0 +1,26 @@
+{
+  "version": "v1.5.4",
+  "publishDate": "2026-05-02",
+  "fileSize": "283 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-29/video-downloader-v1.5.4-debug.apk",
+  "sha256": "8991ac3d37df90c8f5bdeb6ab227d2f214d77e4e2de3499e438c030772027343",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly-29",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-29/video-downloader-v1.5.4-debug.apk"
+  },
+  "changelog": {
+    "added": [
+      "Audio disable option - the player audio panel now includes None and Auto options so audio playback can be disabled directly from the player"
+    ],
+    "fixed": [
+      "Double-tap seek UI friction - left and right double-tap seek no longer force the full player chrome to pop up during skipping",
+      "Center double-tap action - double-tapping the middle zone now toggles play and pause instead of being treated like a left or right seek tap"
+    ],
+    "improved": [
+      "Release metadata updated to v1.5.4"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}

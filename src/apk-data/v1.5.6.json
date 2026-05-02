@@ -1,0 +1,25 @@
+{
+  "version": "v1.5.6",
+  "publishDate": "2026-05-02",
+  "fileSize": "283 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-37/video-downloader-v1.5.6-debug.apk",
+  "sha256": "513d4f3b692211061c81c71b31dfac6dd12add5f60d0e385775f9b632d94da0d",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly-37",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/nightly-37/video-downloader-v1.5.6-debug.apk"
+  },
+  "changelog": {
+    "added": [],
+    "fixed": [
+      "Pause interruption handling - worker shutdown during a user pause is no longer misreported as a real download failure when yt-dlp streams are closed mid-read",
+      "Playlist pause stability - pausing one running playlist item now pauses the remaining playlist queue instead of letting downstream items fall into canceled states",
+      "Pause state reconciliation - WorkManager terminal events now preserve the pause window cleanly so paused downloads stay resumable until the 10-minute expiry"
+    ],
+    "improved": [
+      "Release metadata updated to v1.5.6"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}
