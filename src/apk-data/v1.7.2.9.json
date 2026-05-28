@@ -1,0 +1,26 @@
+{
+  "version": "v1.7.2.9",
+  "publishDate": "2026-05-28",
+  "fileSize": "65.1 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.9/video-downloader-v1.7.2.9.apk",
+  "sha256": "ed90afbb176d2d037fec300a6c7b55a369c6776928e6ced356c954f21a377e23",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.7.2.9",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.9/video-downloader-v1.7.2.9.apk"
+  },
+  "changelog": {
+    "added": [],
+    "fixed": [
+      "Unknown-duration seeking - the player now disables timeline and gesture seeking when a file reports no usable duration"
+    ],
+    "improved": [
+      "In-app player resume - playback position and play/pause state are now saved across app restarts",
+      "Downloads smoothness - local library filtering, sorting, and file checks now avoid repeated work while browsing downloaded media",
+      "Storage cleanup - empty private staging folders are pruned after successful public Downloads export",
+      "Release metadata updated to v1.7.2.9"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}

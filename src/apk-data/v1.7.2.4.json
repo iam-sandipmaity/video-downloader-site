@@ -1,0 +1,50 @@
+{
+  "version": "v1.7.2.4",
+  "publishDate": "2026-05-26",
+  "fileSize": "65.1 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.4/video-downloader-v1.7.2.4.apk",
+  "sha256": "823b3c0893600d59fe83890ab76a687cab4007189f36e109eb46aea00a75dd1e",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.7.2.4",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.4/video-downloader-v1.7.2.4.apk"
+  },
+  "changelog": {
+    "added": [],
+    "fixed": [
+      "CI verification coverage - the Android workflow now blocks on explicit Kotlin compile and unit test checks",
+      "Stable release auto-trigger scope - the main release workflow no longer auto-runs on every push to main",
+      "Lint report visibility - standard debug lint now runs as an advisory CI step and uploads reports",
+      "Unit test Kotlin assertions - the app module now includes the Kotlin JUnit test bridge",
+      "Unit test temp directory API - split artifact tests now use kotlin.io.path.createTempDirectory",
+      "JVM-safe URL parsing - URL validation and source-host detection now use Java URI parsing",
+      "MediaStore API guard - the legacy delete path now returns early below Android 10",
+      "Lint compatibility cleanup - the stderr ring buffer now uses removeAt(0)",
+      "Compose locale observability - download history summary text now derives lowercase formatting from LocalConfiguration",
+      "Compose resource lookup cleanup - settings, history, player, queue, update changelog, and YouTube auth screens now capture resource values in composition",
+      "Localized queue format strings - the Simplified Chinese queue subtitle and resume-window strings now match the placeholder arguments",
+      "Localized common remove label - the shared common_remove string is now translated in supported resource sets",
+      "Localized fallback resource coverage - supported locale sets now include newer downloads, player, queue recovery, history search, and repo-safe update strings and plurals",
+      "Locale-safe formatting and zh placeholder sync - duration and file-size formatting now use an explicit locale",
+      "Locale bundle, PiP, and backup config cleanup - target SDK now aligns with compile SDK 36 and backup extraction rules are declared explicitly",
+      "Media3 opt-in cleanup - player screen and player viewmodel setup now explicitly opt into the unstable Media3 APIs",
+      "Media3 resize mode decoupling - player state and resize option labels now use app-owned resize mode constants",
+      "Tagged release validation - version tags now fail fast when github.ref_name does not match APP_VERSION_NAME",
+      "Artifact cleanup pagination - scheduled cleanup now paginates through the full artifact list",
+      "Cookie export feedback - exporting cookies to a file now surfaces success and real write failures",
+      "Paused-download cleanup scope - expired paused downloads now clean up only the app-managed artifacts for that task",
+      "Public export write safety - Android 10+ public-download export now treats MediaStore stream-open failures as real failures",
+      "Large analyze memory pressure - link analysis now prefers the captured info-json snapshot and caps retained stdout text",
+      "WorkManager observer cleanup - per-task work observers are now replaced and canceled cleanly on retries, resumes, and terminal states"
+    ],
+    "improved": [
+      "Wrapper-first builds - local docs and GitHub Actions now use the checked-in Gradle wrapper",
+      "Split Android workflows - CI build, nightly publishing, main release, and tag release now live in separate GitHub Actions files",
+      "PR-visible nightly artifacts - nightly now runs for pull requests targeting main and uploads a debug APK artifact",
+      "Safer runtime update blocking - yt-dlp updates now wait for queued, running, or paused downloads",
+      "Release metadata updated to v1.7.2.4"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}

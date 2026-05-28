@@ -1,0 +1,33 @@
+{
+  "version": "v1.7.2.7",
+  "publishDate": "2026-05-28",
+  "fileSize": "65.1 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.7/video-downloader-v1.7.2.7.apk",
+  "sha256": "ff9905e956d3973276107463a59ece2b5b33342c41710ca6f88104bc054326a6",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.7.2.7",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.7/video-downloader-v1.7.2.7.apk"
+  },
+  "changelog": {
+    "added": [
+      "Smart analyze prefetch - pasted or typed secure links now start a quiet debounced background analyze",
+      "Playlist file format analysis - playlist items can now lazy-load file-specific formats from Edit"
+    ],
+    "fixed": [
+      "Duplicate YouTube format rows - same-spec format choices are collapsed before the picker renders them",
+      "Audio-only carryover - a previous audio analysis no longer makes the next video or playlist default to audio-only unexpectedly",
+      "Sparse platform formats - parser fallback now accepts requested formats, requested downloads, and root-level metadata",
+      "Post-processing feedback - queue items now surface extract, merge, metadata, thumbnail, and container-finalizing stages",
+      "Localization lint - transient playlist-analysis helper labels are marked non-translatable"
+    ],
+    "improved": [
+      "Browse analyze speed and routing - YouTube analysis now prefers saved access/session hints and reuses recent info-json snapshots where safe",
+      "Playlist format architecture - large playlists now stay light at first and only deepen format data when the user asks",
+      "Thumbnail post-processing - embedded or written thumbnails are converted to JPG to reduce WebP-related post-processing failures",
+      "Release metadata updated to v1.7.2.7"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}

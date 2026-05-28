@@ -1,0 +1,27 @@
+{
+  "version": "v1.7.2.5",
+  "publishDate": "2026-05-26",
+  "fileSize": "65.1 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.5/video-downloader-v1.7.2.5.apk",
+  "sha256": "eab60b342e6d9bd8e0207c8e8df2ad0f3c4f497bf229b12c8d04520d19e9214b",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.7.2.5",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.5/video-downloader-v1.7.2.5.apk"
+  },
+  "changelog": {
+    "added": [
+      "Video player previous and next controls - the in-app video player now shows previous and next buttons for adjacent saved videos"
+    ],
+    "fixed": [],
+    "improved": [
+      "Master workflow controller - GitHub Actions now route build, nightly, release, and cleanup behavior through one master.yml controller workflow",
+      "Nightly artifact delivery - the latest successful main build is now exposed through a stable nightly.link APK artifact",
+      "Player control polish - the in-app video player now spaces previous and next controls more comfortably and softens swipe HUD feedback",
+      "CodeQL controller wiring - CodeQL can now be enabled from the shared workflow controller",
+      "Release metadata updated to v1.7.2.5"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}

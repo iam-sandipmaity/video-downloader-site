@@ -1,0 +1,28 @@
+{
+  "version": "v1.7.2.2",
+  "publishDate": "2026-05-24",
+  "fileSize": "65 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.2/video-downloader-v1.7.2.2.apk",
+  "sha256": "fd3c7e890711e9ff655337bcf6b89006d01730c4db444359cb6a6d93d21bde4a",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.7.2.2",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.2/video-downloader-v1.7.2.2.apk"
+  },
+  "changelog": {
+    "added": [
+      "Derived output transforms for muxed-only sources - muxed-only links can now expose optional Extract audio and Remove audio actions"
+    ],
+    "fixed": [
+      "Muxed-source postprocessing - selecting Remove audio now performs a real ffmpeg strip-audio pass after download",
+      "Release shrinker dependency gap - release builds now include the missing org.tukaani:xz runtime required by the bundled commons-compress path"
+    ],
+    "improved": [
+      "Truthful format tabs - source tabs now stay aligned to the real streams returned by yt-dlp",
+      "Output-aware format sheet behavior - filename templates, subtitle toggles, and related extras now follow the effective output type",
+      "Release metadata updated to v1.7.2.2"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}

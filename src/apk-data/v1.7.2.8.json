@@ -1,0 +1,25 @@
+{
+  "version": "v1.7.2.8",
+  "publishDate": "2026-05-28",
+  "fileSize": "65.1 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.8/video-downloader-v1.7.2.8.apk",
+  "sha256": "cd1feda66456d40e2f4bd15eddfca901c71b9ccd1a0c1e47577ca4a9f38a3806",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.7.2.8",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.8/video-downloader-v1.7.2.8.apk"
+  },
+  "changelog": {
+    "added": [],
+    "fixed": [
+      "YouTube HLS MP4 recovery - failed MPEG-TS-in-MP4 fixups now retry through adaptive merge instead of exporting unseekable 00:00 MP4 files",
+      "Default audio language - format selection now respects yt-dlp audio language/default preference"
+    ],
+    "improved": [
+      "Thumbnail post-processing - downloads no longer force WebP thumbnails through JPG conversion",
+      "Release metadata updated to v1.7.2.8"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}

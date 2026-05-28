@@ -1,0 +1,34 @@
+{
+  "version": "v1.7.2.3",
+  "publishDate": "2026-05-24",
+  "fileSize": "65.1 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.3/video-downloader-v1.7.2.3.apk",
+  "sha256": "6cab51318a5476d8063bb8123ac6ae7f636015eac783844a7dc4306d55e9ebc4",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.7.2.3",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.3/video-downloader-v1.7.2.3.apk"
+  },
+  "changelog": {
+    "added": [
+      "Library search - Downloads and History now include inline search so saved media and past tasks are easier to filter",
+      "External player fallback - the built-in player can now hand off saved or imported media to another player more easily",
+      "Repo-safe update flavor - added a repoSafe distribution flavor that keeps yt-dlp auto-update off by default for repository-friendly builds"
+    ],
+    "fixed": [
+      "Targeted failure help - recovery panels now surface more useful next steps and actions for common failure patterns",
+      "Audio extraction recovery - WAV and FLAC conversions no longer receive invalid bitrate arguments",
+      "FFmpeg runtime preference - runtime setup now tries the newer linked or overlay FFmpeg before falling back to the legacy bundled binary",
+      "Player format support plumbing - more audio and video containers now get correct MIME hints, library classification, and in-app or external-open handling"
+    ],
+    "improved": [
+      "Recovery guidance classification - failed queue items now classify likely problems into clearer buckets",
+      "Downloads header density - compacted selection actions plus top filter and sort controls",
+      "Playback-safe video defaults - when no exact format is chosen manually, video downloads now prefer more device-friendly defaults",
+      "Brief compatibility heads-up - variable-support formats now show only a short 2-second playback notice",
+      "Release metadata updated to v1.7.2.3"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}

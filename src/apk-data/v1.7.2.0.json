@@ -1,0 +1,29 @@
+{
+  "version": "v1.7.2.0",
+  "publishDate": "2026-05-23",
+  "fileSize": "84.7 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.0/video-downloader-v1.7.2.0-release.apk",
+  "sha256": "a6ca49eae100c4f82269f8360195a113ac5e01a3a68310514f602522de568fa5",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.7.2.0",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.0/video-downloader-v1.7.2.0-release.apk"
+  },
+  "changelog": {
+    "added": [],
+    "fixed": [
+      "TLS downgrade during analysis - removed the insecure certificate-check bypass from the analysis fallback path",
+      "Sensitive local data exposure - moved download secrets out of task persistence, cleared terminal task traces, disabled Android backup for app data, and tightened log/export handling",
+      "Runtime update verification gaps - app and FFmpeg updates now verify signer identity, while yt-dlp updates now require and validate the published checksum manifest before replacement",
+      "WebView trust boundaries - hardened preview, cookie-capture, and YouTube access WebViews, and retired the in-app PO-token generator in favor of safer saved session hints",
+      "File-sharing surface area - narrowed FileProvider cache exposure to the exact update and export directories the app actually shares"
+    ],
+    "improved": [
+      "Security hardening release - bundled the vulnerability-fix pass into one follow-up release covering update trust, storage handling, WebView safety, and diagnostic-data retention",
+      "Scoped storage alignment - Android 10 now follows the same app-specific download staging plus public-export flow as newer Android versions",
+      "Release metadata updated to v1.7.2.0"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}

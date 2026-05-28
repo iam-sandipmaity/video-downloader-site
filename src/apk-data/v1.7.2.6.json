@@ -1,0 +1,29 @@
+{
+  "version": "v1.7.2.6",
+  "publishDate": "2026-05-27",
+  "fileSize": "65.1 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.6/video-downloader-v1.7.2.6.apk",
+  "sha256": "15b75e28399720ede018e3214258967ea4754987feb00dea538c7f14fa7b8fe0",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.7.2.6",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.6/video-downloader-v1.7.2.6.apk"
+  },
+  "changelog": {
+    "added": [],
+    "fixed": [
+      "Cross-site analysis hang recovery - stalled yt-dlp analyze attempts now time out cleanly, fall through to safer extractor candidates, and stop leaving pasted links stuck on endless Analyzing",
+      "Playlist loading bottlenecks - YouTube and other supported playlist-style links now use a lighter discovery path",
+      "YouTube format noise - storyboard and mhtml pseudo-formats are filtered out",
+      "History cache growth - analyzed link history now rotates automatically once it grows past 5 MB",
+      "Log archive sprawl - archived app, crash, and device log backups are now automatically pruned"
+    ],
+    "improved": [
+      "Faster link analysis routing - normal YouTube links now force single-video analysis and reuse captured info.json metadata more aggressively",
+      "Safer playlist entry resolution - playlist items now resolve relative entry URLs more reliably",
+      "Release metadata updated to v1.7.2.6"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "version": "v1.7.2.1",
+  "publishDate": "2026-05-24",
+  "fileSize": "84.7 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.1/video-downloader-v1.7.2.1-release.apk",
+  "sha256": "3f82e0ed31c369c3d42628b0d9fcee8e6e728735b38285f79da45ffaf3c6742c",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.7.2.1",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.2.1/video-downloader-v1.7.2.1-release.apk"
+  },
+  "changelog": {
+    "added": [
+      "GitHub wiki starter set - added a publish-ready wiki content pack covering setup, download workflow, playback, troubleshooting, updates, architecture, development, and policy pages"
+    ],
+    "fixed": [
+      "Non-YouTube analysis timeout recovery - slower sites now get safe extended-timeout retries during link analysis without restoring the old insecure certificate-bypass fallback",
+      "yt-dlp runtime updater flow - the app now routes yt-dlp updates through the downloader's own self-update path instead of manually replacing the embedded runtime file",
+      "Audio extraction merge flags - audio-only downloads no longer pass invalid yt-dlp merge-output arguments like m4a",
+      "Audio-only source classification - links that only expose audio containers now stay under Audio only instead of being mislabeled as Video + audio",
+      "Site compatibility regressions after v1.7.2.0 - restored newer extractor/runtime recovery behavior for pages that had started failing or exposing fewer formats",
+      "Postprocessing recovery loops - optional yt-dlp postprocessing failures now salvage already-finished media more reliably",
+      "VP9/WebM merge behavior - VP9 plus Opus downloads now resolve straight to webm when appropriate",
+      "History trace visibility - restored sanitized per-task debug traces in Download History",
+      "Recovered thumbnail sidecars - recovery paths no longer export stray thumbnail .webp files into public Downloads",
+      "In-app video playback handoff - opening a video now pauses background audio playback from the app, and the center play/pause overlay is visually centered again",
+      "Android chooser overmatching - the app no longer advertises itself for unrelated browser and file-open targets"
+    ],
+    "improved": [
+      "Auto container defaults - single-file video downloads now default to Auto container resolution",
+      "Explicit MP4 safety filtering - choosing mp4 now prefers MP4-safe video-plus-audio combinations",
+      "Container-routing polish - YouTube merge routing now chooses cleaner final targets for AVC1, AV1, and VP9/Opus selections",
+      "README presentation refresh - reorganized the repository landing page into a more visual release overview",
+      "Preview gallery consistency - README and wiki screenshot galleries now use a more stable two-column rhythm",
+      "Nightly publishing control - standard CI runs now keep building APK artifacts without auto-publishing GitHub nightly prereleases",
+      "Release metadata updated to v1.7.2.1"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}
