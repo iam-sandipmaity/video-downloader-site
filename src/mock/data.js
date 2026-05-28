@@ -73,6 +73,14 @@ export const downloadOptions = [
   },
   {
     id: 2,
+    name: "Nightly Build",
+    description: "Download the latest automated testing build from GitHub",
+    icon: "Package",
+    link: "https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly",
+    primary: false
+  },
+  {
+    id: 3,
     name: "Obtainium",
     description: "Track GitHub releases and install updates with Obtainium",
     icon: "Package",

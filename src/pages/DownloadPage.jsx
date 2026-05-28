@@ -53,6 +53,7 @@ const supportedFormats = [
 
 const obtainiumUrl =
   'https://apps.obtainium.imranr.dev/redirect.html?r=obtainium://add/https://github.com/iam-sandipmaity/video-downloader';
+const nightlyReleaseUrl = 'https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly';
 
 const DownloadPage = () => {
   const [copiedSHA, setCopiedSHA] = React.useState(false);
@@ -92,6 +93,13 @@ const DownloadPage = () => {
           href: releaseUrl,
           icon: Github,
           meta: 'Release page',
+        },
+        {
+          name: 'Nightly Build',
+          description: 'Try the latest automated build for testing.',
+          href: nightlyReleaseUrl,
+          icon: Package,
+          meta: 'Testing build',
         },
         {
           name: 'Obtainium',
@@ -280,7 +288,7 @@ const DownloadPage = () => {
               </Link>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
               {downloadMethods.map((method) => {
                 const Icon = method.icon;
                 return (
