@@ -1,13 +1,84 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Star, GitFork, AlertCircle, ExternalLink } from 'lucide-react';
+import { Github, Star, GitFork, AlertCircle, ExternalLink, Download } from 'lucide-react';
 import { appInfo, githubStats } from '../mock/data';
+import { formatDownloadCount, getReleaseDownloadCount, GITHUB_API_BASE } from '../utils/githubStats';
+
+const GITHUB_OWNER = 'iam-sandipmaity';
+const GITHUB_REPO = 'video-downloader';
+
+const formatStat = (value) => {
+  if (typeof value !== 'number' || Number.isNaN(value)) {
+    return value;
+  }
+
+  return new Intl.NumberFormat(undefined, {
+    notation: value >= 10000 ? 'compact' : 'standard',
+    maximumFractionDigits: value >= 10000 ? 1 : 0,
+  }).format(value);
+};
+
+const getOpenIssueCount = async (signal) => {
+  const response = await fetch(
+    `https://api.github.com/search/issues?q=repo:${GITHUB_OWNER}/${GITHUB_REPO}+type:issue+state:open`,
+    { signal },
+  );
+
+  if (!response.ok) {
+    throw new Error('Unable to load GitHub issue count');
+  }
+
+  const data = await response.json();
+  return data.total_count ?? githubStats.issues;
+};
 
 const OpenSource = () => {
+  const [liveStats, setLiveStats] = React.useState({
+    stars: githubStats.stars,
+    forks: githubStats.forks,
+    issues: githubStats.issues,
+    downloads: githubStats.downloads,
+  });
+
+  React.useEffect(() => {
+    const controller = new AbortController();
+
+    const loadGithubStats = async () => {
+      try {
+        const [repo, issueCount, downloadCount] = await Promise.all([
+          fetch(GITHUB_API_BASE, { signal: controller.signal }).then((response) => {
+            if (!response.ok) {
+              throw new Error('Unable to load GitHub repository stats');
+            }
+            return response.json();
+          }),
+          getOpenIssueCount(controller.signal),
+          getReleaseDownloadCount(controller.signal),
+        ]);
+
+        setLiveStats({
+          stars: repo.stargazers_count ?? githubStats.stars,
+          forks: repo.forks_count ?? githubStats.forks,
+          issues: issueCount,
+          downloads: downloadCount,
+        });
+      } catch (error) {
+        if (error.name !== 'AbortError') {
+          console.warn('Failed to load live GitHub stats:', error);
+        }
+      }
+    };
+
+    loadGithubStats();
+
+    return () => controller.abort();
+  }, []);
+
   const stats = [
-    { icon: Star, label: 'Stars', value: githubStats.stars.toLocaleString() },
-    { icon: GitFork, label: 'Forks', value: githubStats.forks },
-    { icon: AlertCircle, label: 'Open Issues', value: githubStats.issues }
+    { icon: Star, label: 'Stars', value: formatStat(liveStats.stars) },
+    { icon: GitFork, label: 'Forks', value: formatStat(liveStats.forks) },
+    { icon: AlertCircle, label: 'Open Issues', value: formatStat(liveStats.issues) },
+    { icon: Download, label: 'Downloads', value: formatDownloadCount(liveStats.downloads) }
   ];
 
   const benefits = [
@@ -36,6 +107,8 @@ const OpenSource = () => {
         <img
           src="https://images.unsplash.com/photo-1489389944381-3471b5b30f04?w=1920&h=1080&fit=crop"
           alt=""
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover"
         />
       </div>
@@ -147,6 +220,8 @@ const OpenSource = () => {
           <img
             src="https://images.unsplash.com/photo-1569017388730-020b5f80a004?w=1400&h=700&fit=crop"
             alt="Open Source"
+            loading="lazy"
+            decoding="async"
             className="w-full h-72 md:h-96 object-cover group-hover:scale-105 transition-transform duration-500"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-teal-600/95 via-emerald-600/95 to-teal-600/95 flex items-center justify-center">

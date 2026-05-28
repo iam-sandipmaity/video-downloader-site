@@ -10,6 +10,7 @@
 
 // Import all JSON files from apk-data directory (Vite glob import)
 const apkModules = import.meta.glob('../apk-data/*.json', { eager: true });
+let cachedApkData = null;
 
 const parseVersion = (versionString) => {
   const match = /^v?(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Za-z.-]+))?$/.exec(versionString ?? '');
@@ -154,6 +155,10 @@ const isValidVersion = (version) => {
  * @returns {Array} Sorted array of APK version data (newest first)
  */
 export const loadApkData = () => {
+  if (cachedApkData) {
+    return cachedApkData;
+  }
+
   try {
     const apkData = Object.entries(apkModules)
       .filter(([fileName]) => {
@@ -171,7 +176,7 @@ export const loadApkData = () => {
       .filter(data => data !== null && isValidVersion(data));
 
     // Sort by publish date first, then by semantic version when dates match.
-    return apkData.sort((a, b) => {
+    cachedApkData = apkData.sort((a, b) => {
       const dateA = new Date(a.publishDate);
       const dateB = new Date(b.publishDate);
       const dateDiff = dateB - dateA;
@@ -182,6 +187,8 @@ export const loadApkData = () => {
 
       return compareVersions(b.version, a.version);
     });
+
+    return cachedApkData;
   } catch (error) {
     console.error('Error loading APK data:', error);
     return [];

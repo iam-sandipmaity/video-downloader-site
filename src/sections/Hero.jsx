@@ -1,11 +1,31 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Download, Github, Package, ArrowRight, Sparkles } from 'lucide-react';
 import DottedPattern from '../components/DottedPattern';
 import { getLatestVersion } from '../utils/apkDataLoader';
+import { formatDownloadCount, getReleaseDownloadCount } from '../utils/githubStats';
 
 const Hero = () => {
+  const prefersReducedMotion = useReducedMotion();
   const latestVersion = getLatestVersion();
+  const [downloadCount, setDownloadCount] = React.useState(null);
+
+  React.useEffect(() => {
+    const controller = new AbortController();
+
+    getReleaseDownloadCount(controller.signal)
+      .then(setDownloadCount)
+      .catch((error) => {
+        if (error.name !== 'AbortError') {
+          console.warn('Failed to load release download count:', error);
+        }
+      });
+
+    return () => controller.abort();
+  }, []);
+
+  const downloadCountLabel = downloadCount === null ? '...' : formatDownloadCount(downloadCount);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -40,9 +60,9 @@ const Hero = () => {
       primary: false
     },
     {
-      text: 'Get on F-Droid',
+      text: 'Add to Obtainium',
       icon: Package,
-      href: 'https://f-droid.org/',
+      href: 'https://apps.obtainium.imranr.dev/redirect.html?r=obtainium://add/https://github.com/iam-sandipmaity/video-downloader',
       primary: false
     }
   ];
@@ -54,20 +74,20 @@ const Hero = () => {
       
       {/* Floating Orbs */}
       <motion.div 
-        animate={{ 
+        animate={prefersReducedMotion ? undefined : {
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3]
         }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-20 left-10 w-72 h-72 bg-teal-400/20 dark:bg-teal-500/20 rounded-full blur-3xl"
+        transition={prefersReducedMotion ? undefined : { duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-20 left-10 w-72 h-72 bg-teal-400/20 dark:bg-teal-500/20 rounded-full blur-3xl will-change-transform"
       />
       <motion.div 
-        animate={{ 
+        animate={prefersReducedMotion ? undefined : {
           scale: [1.2, 1, 1.2],
           opacity: [0.2, 0.4, 0.2]
         }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-400/20 dark:bg-emerald-500/20 rounded-full blur-3xl"
+        transition={prefersReducedMotion ? undefined : { duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-400/20 dark:bg-emerald-500/20 rounded-full blur-3xl will-change-transform"
       />
 
       {/* Dotted Background Pattern */}
@@ -196,11 +216,11 @@ const Hero = () => {
             <div className="relative">
               {/* Glow Effect */}
               <motion.div
-                animate={{
+                animate={prefersReducedMotion ? undefined : {
                   scale: [1, 1.1, 1],
                   opacity: [0.3, 0.5, 0.3]
                 }}
-                transition={{
+                transition={prefersReducedMotion ? undefined : {
                   duration: 4,
                   repeat: Infinity,
                   ease: "easeInOut"
@@ -210,10 +230,10 @@ const Hero = () => {
               
               {/* Phone Mockup */}
               <motion.div
-                animate={{
+                animate={prefersReducedMotion ? undefined : {
                   y: [0, -15, 0],
                 }}
-                transition={{
+                transition={prefersReducedMotion ? undefined : {
                   duration: 5,
                   repeat: Infinity,
                   ease: "easeInOut"
@@ -224,17 +244,18 @@ const Hero = () => {
                   <img
                     src="/images/app-mockup.svg"
                     alt="Video Downloader App Mockup"
-                    loading="lazy"
+                    loading="eager"
+                    decoding="async"
                     className="relative w-80 h-auto rounded-[3rem] shadow-2xl border-8 border-gray-900 dark:border-gray-700"
                   />
                   
                   {/* Floating Download Icon */}
                   <motion.div
-                    animate={{
+                    animate={prefersReducedMotion ? undefined : {
                       y: [0, -12, 0],
                       rotate: [0, 5, -5, 0]
                     }}
-                    transition={{
+                    transition={prefersReducedMotion ? undefined : {
                       duration: 3,
                       repeat: Infinity,
                       ease: "easeInOut"
@@ -256,7 +277,7 @@ const Hero = () => {
                         <Sparkles className="w-6 h-6 text-teal-600 dark:text-teal-400" />
                       </div>
                       <div>
-                        <div className="text-2xl font-bold text-gray-900 dark:text-white">1K+</div>
+                        <div className="text-2xl font-bold text-gray-900 dark:text-white">{downloadCountLabel}</div>
                         <div className="text-xs text-gray-500 dark:text-gray-400">Downloads</div>
                       </div>
                     </div>

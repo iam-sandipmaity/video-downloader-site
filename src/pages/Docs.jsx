@@ -1,11 +1,79 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Search, BookOpen, Code, HelpCircle } from 'lucide-react';
+import { Search, BookOpen, Code, HelpCircle, Link as LinkIcon } from 'lucide-react';
 import { docs } from '../mock/data';
+
+const slugify = (value) =>
+  value
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+const getDocHeadings = (doc) =>
+  doc.content
+    .split('\n')
+    .filter((line) => line.startsWith('## ') || line.startsWith('### ') || line.startsWith('#### '))
+    .map((line) => line.replace(/^#+\s*/, ''));
+
+const getDocAnchorIds = (doc) => [
+  doc.id,
+  slugify(doc.id),
+  slugify(doc.title),
+  ...getDocHeadings(doc).map(slugify),
+];
+
+const findDocByHash = (hash) => {
+  const hashValue = decodeURIComponent(hash.replace(/^#/, ''));
+  const normalizedHash = slugify(hashValue);
+
+  if (!normalizedHash) {
+    return null;
+  }
+
+  return docs.find((doc) => getDocAnchorIds(doc).includes(normalizedHash)) ?? null;
+};
 
 const Docs = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedDoc, setSelectedDoc] = useState(docs[0]);
+  const [selectedDoc, setSelectedDoc] = useState(() => findDocByHash(window.location.hash) ?? docs[0]);
+
+  useEffect(() => {
+    const syncDocFromHash = () => {
+      const doc = findDocByHash(window.location.hash);
+      if (doc) {
+        setSelectedDoc(doc);
+      }
+    };
+
+    syncDocFromHash();
+    window.addEventListener('hashchange', syncDocFromHash);
+
+    return () => window.removeEventListener('hashchange', syncDocFromHash);
+  }, []);
+
+  useEffect(() => {
+    const hashValue = decodeURIComponent(window.location.hash.replace(/^#/, ''));
+    const targetId = slugify(hashValue);
+
+    if (!targetId) {
+      return;
+    }
+
+    const scrollTimer = window.setTimeout(() => {
+      document.getElementById(targetId)?.scrollIntoView({
+        block: 'start',
+        behavior: 'smooth',
+      });
+    }, 80);
+
+    return () => window.clearTimeout(scrollTimer);
+  }, [selectedDoc.id]);
+
+  const selectDoc = (doc) => {
+    setSelectedDoc(doc);
+    window.history.pushState(null, '', `#${slugify(doc.title)}`);
+  };
 
   const docCategories = {
     'Getting Started': ['installation', 'usage', 'converter', 'compressor'],
@@ -91,16 +159,17 @@ const Docs = () => {
                         
                         return (
                           <li key={doc.id}>
-                            <button
-                              onClick={() => setSelectedDoc(doc)}
-                              className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
+                            <a
+                              href={`#${slugify(doc.title)}`}
+                              onClick={() => selectDoc(doc)}
+                              className={`block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
                                 selectedDoc.id === doc.id
                                   ? 'bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 font-medium'
                                   : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
                               }`}
                             >
                               {doc.title}
-                            </button>
+                            </a>
                           </li>
                         );
                       })}
@@ -124,34 +193,54 @@ const Docs = () => {
                 {selectedDoc.content.split('\n').map((line, index) => {
                   // Headers - h1
                   if (line.startsWith('# ')) {
+                    const title = line.substring(2);
+                    const id = slugify(title);
                     return (
-                      <h1 key={index} className="text-3xl font-bold mb-6 text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-3">
-                        {line.substring(2)}
+                      <h1 id={id} key={index} className="text-3xl font-bold mb-6 text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-3 scroll-mt-24 group">
+                        <a href={`#${id}`} className="inline-flex items-center gap-2 hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
+                          <span>{title}</span>
+                          <LinkIcon className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </a>
                       </h1>
                     );
                   }
                   // Headers - h2
                   if (line.startsWith('## ')) {
+                    const title = line.substring(3);
+                    const id = slugify(title);
                     return (
-                      <h2 key={index} id={`heading-${index}`} className="text-2xl font-bold mt-10 mb-4 text-gray-900 dark:text-white scroll-mt-24 flex items-center">
+                      <h2 key={index} id={id} className="text-2xl font-bold mt-10 mb-4 text-gray-900 dark:text-white scroll-mt-24 flex items-center group">
                         <span className="w-1 h-8 bg-teal-500 rounded-full mr-3"></span>
-                        {line.substring(3)}
+                        <a href={`#${id}`} className="inline-flex items-center gap-2 hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
+                          <span>{title}</span>
+                          <LinkIcon className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </a>
                       </h2>
                     );
                   }
                   // Headers - h3
                   if (line.startsWith('### ')) {
+                    const title = line.substring(4);
+                    const id = slugify(title);
                     return (
-                      <h3 key={index} className="text-xl font-semibold mt-8 mb-3 text-gray-800 dark:text-gray-200">
-                        {line.substring(4)}
+                      <h3 id={id} key={index} className="text-xl font-semibold mt-8 mb-3 text-gray-800 dark:text-gray-200 scroll-mt-24 group">
+                        <a href={`#${id}`} className="inline-flex items-center gap-2 hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
+                          <span>{title}</span>
+                          <LinkIcon className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </a>
                       </h3>
                     );
                   }
                   // Headers - h4
                   if (line.startsWith('#### ')) {
+                    const title = line.substring(5);
+                    const id = slugify(title);
                     return (
-                      <h4 key={index} className="text-lg font-semibold mt-6 mb-2 text-gray-700 dark:text-gray-300">
-                        {line.substring(5)}
+                      <h4 id={id} key={index} className="text-lg font-semibold mt-6 mb-2 text-gray-700 dark:text-gray-300 scroll-mt-24 group">
+                        <a href={`#${id}`} className="inline-flex items-center gap-2 hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
+                          <span>{title}</span>
+                          <LinkIcon className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </a>
                       </h4>
                     );
                   }

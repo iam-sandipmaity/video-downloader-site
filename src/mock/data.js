@@ -73,11 +73,11 @@ export const downloadOptions = [
   },
   {
     id: 2,
-    name: "F-Droid",
-    description: "Coming soon — will be available on F-Droid",
+    name: "Obtainium",
+    description: "Track GitHub releases and install updates with Obtainium",
     icon: "Package",
-    link: "#",
-    comingSoon: true
+    link: "https://apps.obtainium.imranr.dev/redirect.html?r=obtainium://add/https://github.com/iam-sandipmaity/video-downloader",
+    primary: false
   }
 ];
 
@@ -137,7 +137,8 @@ export const versions = [
 export const githubStats = {
   stars: 1234,
   forks: 89,
-  issues: 12
+  issues: 12,
+  downloads: 0
 };
 
 export const docs = [
@@ -185,7 +186,7 @@ When a new version is released, simply download the new APK and install it over 
 
 - Minimum: Android 8.0 (API 26) — Oreo
 - Recommended: Android 11+ (API 30) — for best compatibility with scoped storage
-- Full support: Android 12, 13, 14, and 15
+- Latest Android support: Android 12, 13, 14, 15, and current Android releases
     `
   },
   {
@@ -703,7 +704,7 @@ A: Not currently planned. The app is built natively for Android.
 A: We aim to release updates whenever yt-dlp ships important extractor fixes or new features are ready. Major releases are announced on the GitHub repository.
 
 **Q: What Android versions are supported?**
-A: Minimum Android 8.0 (API 26), recommended Android 11+ (API 30) for best compatibility.
+A: Minimum Android 8.0 (API 26), with support for current Android releases. Android 11+ is recommended for the best scoped-storage compatibility.
 
 **Q: How do I report a bug or request a feature?**
 A: Open a GitHub Issue at https://github.com/iam-sandipmaity/video-downloader/issues

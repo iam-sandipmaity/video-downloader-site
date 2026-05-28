@@ -361,13 +361,13 @@ const Versions = () => {
                               <ExternalLink className="w-4 h-4 opacity-60" />
                             </a>
                             <a
-                              href={version.links.fdroid}
+                              href="https://apps.obtainium.imranr.dev/redirect.html?r=obtainium://add/https://github.com/iam-sandipmaity/video-downloader"
                               target="_blank"
                               rel="noopener noreferrer"
                               className="inline-flex items-center space-x-2 px-6 py-3 bg-white dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 hover:border-teal-500 dark:hover:border-teal-500 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-semibold hover:scale-105 transition-all duration-200"
                             >
                               <Package className="w-5 h-5" />
-                              <span>F-Droid</span>
+                              <span>Obtainium</span>
                               <ExternalLink className="w-4 h-4 opacity-60" />
                             </a>
                           </div>
