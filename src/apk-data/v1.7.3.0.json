@@ -1,0 +1,25 @@
+{
+  "version": "v1.7.3.0",
+  "publishDate": "2026-05-29",
+  "fileSize": "65.1 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.3.0/video-downloader-v1.7.3.0.apk",
+  "sha256": "372861913ad91e9b96733290a19df12bfd983bc5ff71751824b7cd7c69f0fb59",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.7.3.0",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.3.0/video-downloader-v1.7.3.0.apk"
+  },
+  "changelog": {
+    "added": [
+      "Crowdin translation helper - added GitHub Actions configuration and contributor notes for syncing Android XML string resources through Crowdin while keeping manual translation PRs supported",
+      "Crowdin README progress board - added generated README translation-progress assets backed by Crowdin's API so language coverage can be shown as a badge and per-language SVG"
+    ],
+    "fixed": [
+      "Crowdin progress refresh - the progress asset workflow now runs from Master CI after the reusable Crowdin sync job succeeds, instead of waiting on a workflow_run event that reusable workflows do not emit",
+      "Crowdin README image cache - generated progress updates now refresh README image URLs with an asset cache key so GitHub and Shields do not keep showing the old pending artwork"
+    ],
+    "improved": [],
+    "removed": [],
+    "comingSoon": []
+  }
+}
