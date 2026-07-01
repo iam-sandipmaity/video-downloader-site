@@ -1,0 +1,21 @@
+{
+  "version": "v1.7.3.1",
+  "publishDate": "2026-05-31",
+  "fileSize": "65.1 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.3.1/video-downloader-v1.7.3.1.apk",
+  "sha256": "dfab1d556e47296cbdb4d216744c48025eba4093c60eb42d2bc4d79520d7872d",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.7.3.1",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.3.1/video-downloader-v1.7.3.1.apk"
+  },
+  "changelog": {
+    "added": [],
+    "fixed": [],
+    "improved": [
+      "Downloads selection release channels 1.7.3.1"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}

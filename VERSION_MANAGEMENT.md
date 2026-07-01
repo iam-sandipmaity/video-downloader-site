@@ -1,129 +1,77 @@
-# Version Management System - Quick Reference
+# Version Management System - Reference Guide
 
 ## System Overview
 
-The Video Downloader App website uses a **JSON-based version management system** that automatically updates all pages when you add new version files.
+The Video Downloader App website uses a **fully automated version management system** powered by GitHub Actions. Whenever a new stable version is released on the main repository (`iam-sandipmaity/video-downloader`), the website automatically detects it, fetches the metadata, calculates integrity hashes, parses release notes, and deploys the updates.
 
 ### What Updates Automatically?
 - ✅ Versions page (`/versions`)
 - ✅ Changelog page (`/changelog`)
-- ✅ Download section (home page - shows latest)
-
-### Where Files Go
-```
-public/apks/          → Your APK files
-src/apk-data/         → Your JSON version files
-```
-
-## Adding a New Version (Quick Steps)
-
-### 1. Upload APK
-Place your APK in: `public/apks/video-downloader-v1.1.0.apk`
-
-### 2. Get SHA256
-```powershell
-# Windows
-Get-FileHash -Algorithm SHA256 "public\apks\video-downloader-v1.1.0.apk"
-
-# Linux/Mac  
-sha256sum public/apks/video-downloader-v1.1.0.apk
-```
-📖 **Detailed guide:** [CALCULATE_SHA256.md](./CALCULATE_SHA256.md)
-### 3. Create JSON File
-1. Copy `src/apk-data/template.json`
-2. Rename to `src/apk-data/v1.1.0.json`
-3. Fill in the details:
-
-```json
-{
-  "version": "v1.1.0",
-  "publishDate": "2024-12-20",
-  "fileSize": "13.2 MB",
-  "apkPath": "/apks/video-downloader-v1.1.0.apk",
-  "sha256": "paste-your-checksum-here",
-  "links": {
-    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.1.0",
-    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
-    "direct": "/apks/video-downloader-v1.1.0.apk"
-  },
-  "changelog": {
-    "added": ["New feature"],
-    "fixed": ["Bug fix"],
-    "improved": ["Enhancement"],
-    "removed": [],
-    "comingSoon": ["Planned for next release"]
-  }
-}
-```
-
-### 4. Done!
-The website automatically loads and displays your new version.
-
-## How It Works
-
-1. **Data Loader** (`src/utils/apkDataLoader.js`) reads all JSON files from `src/apk-data/`
-2. **Auto-sorted** by publish date (newest first)
-3. **Latest version** is automatically used on the download section
-4. **All versions** appear on versions and changelog pages
-
-## File Structure
-
-```
-video-downloader-site/
-├── public/
-│   └── apks/
-│       ├── video-downloader-v1.0.0.apk
-│       └── video-downloader-v1.1.0.apk
-│
-├── src/
-│   ├── apk-data/
-│   │   ├── template.json          ← Copy this
-│   │   ├── v1.0.0.json           ← Example
-│   │   ├── v1.1.0.json           ← Your new version
-│   │   └── README.md
-│   │
-│   └── utils/
-│       └── apkDataLoader.js      ← Auto-loader
-│
-└── ADMIN_GUIDE.md                 ← Full documentation
-```
-
-## Common Tasks
-
-### Get File Size
-```powershell
-# Windows
-(Get-Item "public\apks\your-file.apk").Length / 1MB
-
-# Linux/Mac
-ls -lh public/apks/your-file.apk
-```
-
-### Validate JSON
-- Use: https://jsonlint.com/
-- Or VS Code built-in JSON validation
-
-### Check Current Versions
-All `.json` files in `src/apk-data/` (except `template.json`)
-
-## Quick Checklist
-
-Before deploying a new version:
-- [ ] APK uploaded to `/public/apks/`
-- [ ] SHA256 checksum calculated
-- [ ] JSON file created in `/src/apk-data/`
-- [ ] All required fields filled
-- [ ] Date in YYYY-MM-DD format
-- [ ] Links are correct
-- [ ] Changelog is clear and specific
-- [ ] JSON is valid (no syntax errors)
-
-## Need More Help?
-
-📖 Full guide: [ADMIN_GUIDE.md](./ADMIN_GUIDE.md)
-📁 Examples: See existing files in `src/apk-data/`
-🔧 Template: `src/apk-data/template.json`
+- ✅ Download section (home page - shows latest stable version)
 
 ---
 
-**Remember:** Just add a JSON file to `src/apk-data/` and everything updates automatically!
+## How the Automation Works
+
+```mermaid
+graph TD
+    A[New Release on App Repo] -->|Trigger| B[GitHub Actions Workflow]
+    B -->|Fetch releases API| C[update-releases.js script]
+    C -->|Filter out nightlies| D{Is Stable Release?}
+    D -->|Yes| E[Extract version, date, file size, download links]
+    E -->|Extract SHA256| F[Read integrity hash from asset metadata]
+    F -->|Parse changelog| G[Categorize bullet points into Added, Fixed, etc.]
+    G -->|Commit & Push| H[Commit JSON to website repo]
+    H -->|Trigger Build| I[Vercel/Netlify Deploys Site]
+```
+
+### 1. Automation script
+The script located at [scripts/update-releases.js](file:///home/error/Prj/video-downloader-site/scripts/update-releases.js) is responsible for:
+- Fetching releases via GitHub REST API.
+- Skipping pre-releases and tags containing the word `nightly`.
+- Downloading the APK to calculate the SHA256 checksum locally if not already provided in the asset metadata.
+- Parsing release bullet points into `added`, `fixed`, `improved`, and `removed` sections.
+
+### 2. GitHub Actions Workflow
+The workflow located at [.github/workflows/update-versions.yml](file:///home/error/Prj/video-downloader-site/.github/workflows/update-versions.yml) handles:
+- Running on a **cron schedule** (every 6 hours).
+- Running on **repository dispatch** (for instant triggers on release).
+- Committing the new JSON release data directly back to the `src/apk-data/` folder.
+
+---
+
+## Instant Trigger Setup (Optional)
+
+To trigger the website to update **instantly** when you publish a release on the main `video-downloader` app repository:
+
+1. Create a **Personal Access Token (PAT)** on GitHub with `repo` write permissions.
+2. Save it as a secret named `WEBSITE_UPDATE_PAT` in your main `video-downloader` repository settings under **Settings > Secrets and variables > Actions**.
+3. Add the following step to the end of your release workflow in the main app repository:
+
+```yaml
+- name: Trigger Website Update
+  uses: peter-evans/repository-dispatch@v3
+  with:
+    token: ${{ secrets.WEBSITE_UPDATE_PAT }}
+    repository: iam-sandipmaity/video-downloader-site
+    event-type: on-new-release
+```
+
+---
+
+## Manual Overrides & Custom Changelogs (Fallback)
+
+If you ever want to write a custom descriptive changelog that is different or more detailed than the bullet points generated by GitHub:
+
+1. Locate the generated JSON file in `src/apk-data/` (e.g., `v1.7.4.json`).
+2. Manually edit the `changelog` object:
+   ```json
+   "changelog": {
+     "added": ["Very detailed user-friendly feature explanation"],
+     "fixed": ["Clear explanation of what crash was resolved"],
+     "improved": [],
+     "removed": [],
+     "comingSoon": []
+   }
+   ```
+3. Commit and push your edits to the website repository. Vercel will automatically redeploy the site with your custom notes.

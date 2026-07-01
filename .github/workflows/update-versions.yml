@@ -1,0 +1,47 @@
+name: Auto Update Releases
+
+on:
+  schedule:
+    # Run every 6 hours to check for new releases
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    # Allow manual triggering from the GitHub Actions tab
+  repository_dispatch:
+    # Allow triggering instantly from another repository (e.g. the main app repo)
+    types: [on-new-release]
+
+jobs:
+  update-releases:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed to commit and push changes back to the repository
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch and Parse Releases
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/update-releases.js
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Check if there are any new JSON files in src/apk-data/
+          git add src/apk-data/*.json
+          
+          if git diff --cached --quiet; then
+            echo "No new releases found. Nothing to commit."
+          else
+            git commit -m "chore: auto-update releases from upstream repository [skip ci]"
+            git push
+            echo "Successfully updated website versions!"
+          fi

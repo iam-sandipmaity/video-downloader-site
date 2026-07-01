@@ -1,27 +1,40 @@
 # Admin Guide: Managing APK Versions
 
-This guide explains how to add new versions to the Video Downloader App website using the JSON-based version management system.
+This guide explains how new versions are added to the Video Downloader App website using the automated version management system.
 
 ## Overview
 
-The website automatically reads version information from JSON files in the `src/apk-data/` directory. When you add a new JSON file, it will automatically appear on:
-- **Versions Page** (`/versions`) - Shows all versions with download options
-- **Changelog Page** (`/changelog`) - Timeline of all changes
-- **Download Section** (Home page) - Shows the latest version
+The website automatically reads version information from JSON files in the `src/apk-data/` directory.
 
-## Quick Start: Adding a New Version
+The process of creating these JSON files is **fully automated via GitHub Actions**. When you publish a release on the main `video-downloader` app repository, the Actions workflow fetches it, compiles the metadata, and commits a version JSON file to this repository. Vercel then automatically rebuilds and deploys the site.
 
-### Step 1: Upload the APK File
+---
+
+## ⚡ Recommended: Automated Flow
+
+The website will automatically check for and publish new stable releases.
+
+1. **Publish a Release:** Publish a new stable release on your main repository (`iam-sandipmaity/video-downloader`).
+2. **Auto-Sync:** The GitHub Actions workflow on the website repository will run automatically (every 6 hours or instantly if repository dispatch is configured).
+3. **Automatic Deployment:** The workflow commits the new `v{version}.json` file to the repo, triggering Vercel to rebuild and publish the changes to `video.sandipmaity.me`.
+
+---
+
+## 🛠️ Fallback: Manual Addition Flow
+
+If you ever need to manually add a release without waiting for the automation:
+
+### Step 1: Upload the APK File (Optional)
+If you want to host the APK directly in this repo instead of pointing to GitHub Releases:
 1. Place your APK file in `public/apks/`
 2. Use a clear naming format: `video-downloader-v1.1.0.apk`
 
 ### Step 2: Calculate SHA256 Checksum
-
+Calculate the SHA256 hash of the APK file:
 **Windows (PowerShell):**
 ```powershell
 Get-FileHash -Algorithm SHA256 "public\apks\video-downloader-v1.1.0.apk"
 ```
-
 **Linux/Mac:**
 ```bash
 sha256sum public/apks/video-downloader-v1.1.0.apk
@@ -35,12 +48,8 @@ sha256sum public/apks/video-downloader-v1.1.0.apk
 3. Fill in all the fields (see structure below)
 4. Save the file
 
-### Step 4: Deploy
-That's it! The website will automatically:
-- Load the new version
-- Sort it by publish date
-- Mark the newest as "Latest"
-- Update all pages automatically
+### Step 4: Commit and Push
+Commit and push the new JSON file to this repository. Vercel will pick up the commit and deploy the updates instantly.
 
 ## JSON File Structure Explained
 

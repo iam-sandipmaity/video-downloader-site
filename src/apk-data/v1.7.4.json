@@ -1,0 +1,26 @@
+{
+  "version": "v1.7.4",
+  "publishDate": "2026-06-05",
+  "fileSize": "65.1 MB",
+  "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.4/video-downloader-v1.7.4.apk",
+  "sha256": "c72827c1a569bcb338435aa0fd6ce32714adc2e9e54f468c675cec8f98c42ff4",
+  "links": {
+    "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.7.4",
+    "fdroid": "https://f-droid.org/packages/com.videodl.app/",
+    "direct": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.4/video-downloader-v1.7.4.apk"
+  },
+  "changelog": {
+    "added": [],
+    "fixed": [
+      "Potential fix for code scanning alert no. 22: Arbitrary file access during archive extraction (\"Zip Slip\")"
+    ],
+    "improved": [
+      "Nightly 2.0.0.0 updates",
+      "Translations update from Hosted Weblate",
+      "Bump AndroidX core ktx",
+      "Music player nightly UI"
+    ],
+    "removed": [],
+    "comingSoon": []
+  }
+}
