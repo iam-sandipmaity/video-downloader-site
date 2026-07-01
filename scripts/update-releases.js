@@ -83,6 +83,78 @@ function parseChangelog(body) {
   return changelog;
 }
 
+// Parse detailed changelog from raw CHANGELOG.md markdown content
+function parseChangelogFromMarkdown(markdown, targetVersion) {
+  const changelog = {
+    added: [],
+    fixed: [],
+    improved: [],
+    removed: [],
+    comingSoon: []
+  };
+
+  // Clean version name (e.g., "v1.7.4" -> "1.7.4")
+  const cleanVersion = targetVersion.replace(/^v/, '');
+  const escapedVersion = cleanVersion.replace(/\./g, '\\.');
+  
+  // Matches a header like ## [1.7.4] or ## [v1.7.4] and captures until the next ## header
+  const versionRegex = new RegExp(
+    `##\\s+\\[v?${escapedVersion}\\][\\s\\S]*?(?=\\n##\\s+\\[|$)`,
+    'i'
+  );
+  
+  const match = markdown.match(versionRegex);
+  if (!match) {
+    return null;
+  }
+  
+  const sectionContent = match[0];
+  
+  // Parse subsections (### Added, ### Changed, ### Fixed, ### Removed, etc.)
+  const subsectionRegex = /###\s+(\w+)\r?\n([\s\S]*?)(?=\n###\s+\w+|\n##\s+\[|$)/gi;
+  let subMatch;
+  
+  while ((subMatch = subsectionRegex.exec(sectionContent)) !== null) {
+    const type = subMatch[1].toLowerCase();
+    const content = subMatch[2];
+    
+    const lines = content.split(/\r?\n/);
+    const bulletPoints = [];
+    for (let line of lines) {
+      line = line.trim();
+      if (line.startsWith('*') || line.startsWith('-') || line.startsWith('+')) {
+        let text = line.substring(1).trim();
+        if (text) {
+          bulletPoints.push(text);
+        }
+      }
+    }
+    
+    if (bulletPoints.length > 0) {
+      if (type === 'added') {
+        changelog.added.push(...bulletPoints);
+      } else if (type === 'fixed' || type === 'security') {
+        changelog.fixed.push(...bulletPoints);
+      } else if (type === 'changed' || type === 'improved') {
+        changelog.improved.push(...bulletPoints);
+      } else if (type === 'removed' || type === 'deprecated') {
+        changelog.removed.push(...bulletPoints);
+      } else {
+        changelog.improved.push(...bulletPoints);
+      }
+    }
+  }
+  
+  // Check if we actually parsed any content
+  const hasContent = 
+    changelog.added.length > 0 || 
+    changelog.fixed.length > 0 || 
+    changelog.improved.length > 0 || 
+    changelog.removed.length > 0;
+    
+  return hasContent ? changelog : null;
+}
+
 // Download a file and calculate its SHA256 checksum
 async function getSha256Checksum(url) {
   console.log(`Downloading APK to calculate checksum from: ${url}`);
@@ -118,6 +190,21 @@ async function run() {
     
     const releases = await response.json();
     console.log(`Found ${releases.length} releases.`);
+
+    // Fetch CHANGELOG.md from main branch of the app repo
+    let changelogMarkdown = '';
+    try {
+      console.log(`Fetching CHANGELOG.md from ${OWNER}/${REPO}...`);
+      const changelogRes = await fetch(`https://raw.githubusercontent.com/${OWNER}/${REPO}/main/CHANGELOG.md`);
+      if (changelogRes.ok) {
+        changelogMarkdown = await changelogRes.text();
+        console.log('Successfully loaded CHANGELOG.md.');
+      } else {
+        console.warn(`Failed to fetch CHANGELOG.md: ${changelogRes.status} ${changelogRes.statusText}`);
+      }
+    } catch (e) {
+      console.warn('Error fetching CHANGELOG.md:', e.message);
+    }
     
     let updatedCount = 0;
     
@@ -172,6 +259,18 @@ async function run() {
       const publishDate = release.published_at.substring(0, 10); // YYYY-MM-DD
       const fileSize = formatBytes(apkAsset.size);
       
+      let changelog = null;
+      if (changelogMarkdown) {
+        changelog = parseChangelogFromMarkdown(changelogMarkdown, version);
+      }
+      
+      if (changelog) {
+        console.log(`Successfully parsed detailed changelog from CHANGELOG.md for ${version}`);
+      } else {
+        console.log(`Falling back to parsing GitHub Release body for ${version}`);
+        changelog = parseChangelog(release.body);
+      }
+      
       const releaseData = {
         version: version,
         publishDate: publishDate,
@@ -183,7 +282,7 @@ async function run() {
           fdroid: 'https://f-droid.org/packages/com.videodl.app/',
           direct: apkAsset.browser_download_url
         },
-        changelog: parseChangelog(release.body)
+        changelog: changelog
       };
       
       // Write JSON to src/apk-data/
