@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { getLatestVersion, loadApkData } from '../utils/apkDataLoader';
 import { formatDownloadCount, getReleaseDownloadCount } from '../utils/githubStats';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 const steps = [
   {
@@ -56,6 +57,7 @@ const obtainiumUrl =
 const nightlyReleaseUrl = 'https://github.com/iam-sandipmaity/video-downloader/releases/tag/nightly';
 
 const DownloadPage = () => {
+  useDocumentTitle('Download APK');
   const [copiedSHA, setCopiedSHA] = React.useState(false);
   const [downloadCount, setDownloadCount] = React.useState(null);
   const latestVersion = getLatestVersion();

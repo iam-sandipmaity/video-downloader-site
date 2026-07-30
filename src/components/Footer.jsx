@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Github, Heart, Download, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Github, Heart, Download, Twitter, Mail, Globe } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -27,8 +27,8 @@ const Footer = () => {
   const socialLinks = [
     { name: 'GitHub', icon: Github, href: 'https://github.com/iam-sandipmaity', color: 'hover:text-white' },
     { name: 'X (Twitter)', icon: Twitter, href: 'https://x.com/iam_sandipmaity', color: 'hover:text-black' },
-    { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/in/iam-sandipmaity', color: 'hover:text-blue-500' },
-    { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/iam_sandipmaity', color: 'hover:text-pink-500' }
+    { name: 'Email', icon: Mail, href: 'mailto:maitysandip@proton.me', color: 'hover:text-teal-500' },
+    { name: 'Website', icon: Globe, href: 'https://profile.sandipmaity.me', color: 'hover:text-emerald-500' }
   ];
 
   return (

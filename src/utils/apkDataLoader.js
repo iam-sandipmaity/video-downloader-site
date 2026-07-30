@@ -13,18 +13,36 @@ const apkModules = import.meta.glob('../apk-data/*.json', { eager: true });
 let cachedApkData = null;
 
 const parseVersion = (versionString) => {
-  const match = /^v?(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Za-z.-]+))?$/.exec(versionString ?? '');
+  if (!versionString) return null;
 
-  if (!match) {
+  // Format: v1.2.3.4-prerelease
+  const cleanVersion = versionString.trim();
+  const dashIndex = cleanVersion.indexOf('-');
+  let releasePart = cleanVersion;
+  let prerelease = '';
+
+  if (dashIndex !== -1) {
+    releasePart = cleanVersion.substring(0, dashIndex);
+    prerelease = cleanVersion.substring(dashIndex + 1);
+  }
+
+  if (releasePart.startsWith('v')) {
+    releasePart = releasePart.substring(1);
+  }
+
+  const segments = releasePart.split('.').map(segment => {
+    if (!/^\d+$/.test(segment)) {
+      return NaN;
+    }
+    return Number(segment);
+  });
+
+  if (segments.some(Number.isNaN) || segments.length === 0) {
     return null;
   }
 
-  const [, major, minor, patch, prerelease = ''] = match;
-
   return {
-    major: Number(major),
-    minor: Number(minor),
-    patch: Number(patch),
+    segments,
     prerelease,
   };
 };
@@ -94,19 +112,14 @@ const compareVersions = (aVersion, bVersion) => {
     return (aVersion ?? '').localeCompare(bVersion ?? '');
   }
 
-  const majorDiff = a.major - b.major;
-  if (majorDiff !== 0) {
-    return majorDiff;
-  }
-
-  const minorDiff = a.minor - b.minor;
-  if (minorDiff !== 0) {
-    return minorDiff;
-  }
-
-  const patchDiff = a.patch - b.patch;
-  if (patchDiff !== 0) {
-    return patchDiff;
+  const maxLength = Math.max(a.segments.length, b.segments.length);
+  for (let i = 0; i < maxLength; i++) {
+    const aVal = a.segments[i] ?? 0;
+    const bVal = b.segments[i] ?? 0;
+    const diff = aVal - bVal;
+    if (diff !== 0) {
+      return diff;
+    }
   }
 
   return comparePrerelease(a.prerelease, b.prerelease);

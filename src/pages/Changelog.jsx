@@ -2,8 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { getAllVersions } from '../utils/apkDataLoader';
 import { FileText } from 'lucide-react';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 const Changelog = () => {
+  useDocumentTitle('Changelog');
   const versions = getAllVersions();
   
   const changeTypeStyles = {

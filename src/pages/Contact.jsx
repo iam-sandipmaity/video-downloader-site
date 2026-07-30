@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Github, MessageSquare, Bug, Lightbulb, ExternalLink, Send } from 'lucide-react';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 const channels = [
   {
@@ -42,6 +43,7 @@ const channels = [
 ];
 
 const Contact = () => {
+  useDocumentTitle('Contact');
   const [copied, setCopied] = useState(false);
   const email = 'maitysandip@proton.me';
 

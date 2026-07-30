@@ -231,13 +231,38 @@ async function run() {
       const jsonFileName = `${version}.json`;
       const jsonFilePath = path.join(APK_DATA_DIR, jsonFileName);
       
-      // 3. Skip if this release version JSON file already exists
+      // 3. Check if release JSON already exists and check if it needs update
+      let existingData = null;
       if (fs.existsSync(jsonFilePath)) {
-        console.log(`Release JSON for ${version} already exists. Skipping.`);
-        continue;
+        try {
+          existingData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf-8'));
+        } catch (e) {
+          console.warn(`Failed to parse existing JSON for ${version}:`, e.message);
+        }
+      }
+
+      if (existingData) {
+        // Upgrade legacy format files that don't track size/date yet
+        if (existingData.apkSize === undefined || existingData.apkUpdatedAt === undefined) {
+          console.log(`Upgrading existing release JSON for ${version} to track size and update date.`);
+          existingData.apkSize = apkAsset.size;
+          existingData.apkUpdatedAt = apkAsset.updated_at;
+          fs.writeFileSync(jsonFilePath, JSON.stringify(existingData, null, 2), 'utf-8');
+          continue;
+        }
+
+        const hasValidChecksum = existingData.sha256 && existingData.sha256 !== 'placeholder-sha256-checksum';
+        const sizeMatches = existingData.apkSize === apkAsset.size;
+        const dateMatches = existingData.apkUpdatedAt === apkAsset.updated_at;
+
+        if (hasValidChecksum && sizeMatches && dateMatches) {
+          console.log(`Release JSON for ${version} is up to date. Skipping.`);
+          continue;
+        }
+        console.log(`Release JSON for ${version} needs update (checksum invalid, size mismatch, or updated date mismatch).`);
       }
       
-      console.log(`Processing new release: ${version}...`);
+      console.log(`Processing release updates for: ${version}...`);
       
       // 4. Determine SHA256 checksum
       let sha256 = '';
@@ -277,6 +302,8 @@ async function run() {
         fileSize: fileSize,
         apkPath: apkAsset.browser_download_url,
         sha256: sha256,
+        apkSize: apkAsset.size,
+        apkUpdatedAt: apkAsset.updated_at,
         links: {
           github: release.html_url,
           fdroid: 'https://f-droid.org/packages/com.videodl.app/',

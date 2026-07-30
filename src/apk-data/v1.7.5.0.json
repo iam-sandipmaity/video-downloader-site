@@ -3,7 +3,7 @@
   "publishDate": "2026-07-05",
   "fileSize": "35.2 MB",
   "apkPath": "https://github.com/iam-sandipmaity/video-downloader/releases/download/v1.7.5.0/video-downloader-v1.7.5.0.apk",
-  "sha256": "21f4ac7ed5a2483fd0e8dd8d89ba79dacbe5d72930051f722190f746afc64433",
+  "sha256": "8e4c89e43e77ae218c460c9de2cde2b398b4ff9f51a32d8be3a16d98e0439c3b",
   "links": {
     "github": "https://github.com/iam-sandipmaity/video-downloader/releases/tag/v1.7.5.0",
     "fdroid": "https://f-droid.org/packages/com.videodl.app/",
@@ -49,5 +49,7 @@
     ],
     "removed": [],
     "comingSoon": []
-  }
+  },
+  "apkSize": 37291117,
+  "apkUpdatedAt": "2026-07-11T18:11:49Z"
 }

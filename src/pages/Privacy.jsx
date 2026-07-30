@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Eye, Database, Lock, Bell, Mail } from 'lucide-react';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 const sections = [
   {
@@ -41,58 +42,61 @@ const sections = [
   },
 ];
 
-const Privacy = () => (
-  <div className="min-h-screen bg-white dark:bg-gray-900">
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-3xl">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="mb-12"
-      >
-        <div className="inline-flex items-center space-x-2 px-3 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 rounded-full text-sm font-medium mb-4">
-          <Shield className="w-4 h-4" />
-          <span>Privacy First</span>
-        </div>
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-          Privacy Policy
-        </h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400">
-          Effective date: <strong>March 8, 2026</strong>
-        </p>
-        <p className="mt-4 text-gray-600 dark:text-gray-400">
-          Video Downloader App is built on a simple principle: your data is yours. This policy explains what we do (and don't do) with information related to the app and this website.
-        </p>
-      </motion.div>
+const Privacy = () => {
+  useDocumentTitle('Privacy Policy');
+  return (
+    <div className="min-h-screen bg-white dark:bg-gray-900">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-3xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-12"
+        >
+          <div className="inline-flex items-center space-x-2 px-3 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 rounded-full text-sm font-medium mb-4">
+            <Shield className="w-4 h-4" />
+            <span>Privacy First</span>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
+            Privacy Policy
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            Effective date: <strong>March 8, 2026</strong>
+          </p>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">
+            Video Downloader App is built on a simple principle: your data is yours. This policy explains what we do (and don't do) with information related to the app and this website.
+          </p>
+        </motion.div>
 
-      <div className="space-y-8">
-        {sections.map((section, i) => {
-          const Icon = section.icon;
-          return (
-            <motion.div
-              key={section.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.07, duration: 0.5 }}
-              className="flex space-x-4"
-            >
-              <div className="flex-shrink-0 w-10 h-10 bg-teal-100 dark:bg-teal-900/30 rounded-lg flex items-center justify-center mt-1">
-                <Icon className="w-5 h-5 text-teal-600 dark:text-teal-400" />
-              </div>
-              <div>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  {section.title}
-                </h2>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  {section.content}
-                </p>
-              </div>
-            </motion.div>
-          );
-        })}
+        <div className="space-y-8">
+          {sections.map((section, i) => {
+            const Icon = section.icon;
+            return (
+              <motion.div
+                key={section.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.07, duration: 0.5 }}
+                className="flex space-x-4"
+              >
+                <div className="flex-shrink-0 w-10 h-10 bg-teal-100 dark:bg-teal-900/30 rounded-lg flex items-center justify-center mt-1">
+                  <Icon className="w-5 h-5 text-teal-600 dark:text-teal-400" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                    {section.title}
+                  </h2>
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                    {section.content}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Privacy;

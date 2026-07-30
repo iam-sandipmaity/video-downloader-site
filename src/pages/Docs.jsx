@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Search, BookOpen, Code, HelpCircle, Link as LinkIcon } from 'lucide-react';
 import { docs } from '../mock/data';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 const slugify = (value) =>
   value
@@ -35,6 +36,7 @@ const findDocByHash = (hash) => {
 };
 
 const Docs = () => {
+  useDocumentTitle('Documentation');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedDoc, setSelectedDoc] = useState(() => findDocByHash(window.location.hash) ?? docs[0]);
 
@@ -143,40 +145,51 @@ const Docs = () => {
             className="lg:col-span-1"
           >
             <nav className="space-y-6 sticky top-24">
-              {Object.entries(docCategories).map(([category, docIds]) => {
-                const Icon = categoryIcons[category];
-                return (
-                  <div key={category}>
-                    <h3 className="flex items-center space-x-2 text-sm font-semibold text-gray-900 dark:text-white mb-3">
-                      <Icon className="w-4 h-4" />
-                      <span>{category}</span>
-                    </h3>
-                    <ul className="space-y-2">
-                      {docIds.map(docId => {
-                        const doc = docs.find(d => d.id === docId);
-                        const isVisible = filteredDocs.some(d => d.id === docId);
-                        if (!doc || !isVisible) return null;
-                        
-                        return (
-                          <li key={doc.id}>
-                            <a
-                              href={`#${slugify(doc.title)}`}
-                              onClick={() => selectDoc(doc)}
-                              className={`block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
-                                selectedDoc.id === doc.id
-                                  ? 'bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 font-medium'
-                                  : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
-                              }`}
-                            >
-                              {doc.title}
-                            </a>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
-                );
-              })}
+              {filteredDocs.length === 0 ? (
+                <div className="px-3 py-4 text-center border border-dashed border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50/50 dark:bg-gray-800/30">
+                  <p className="text-sm font-medium text-gray-500 dark:text-gray-400">No documents match your search.</p>
+                </div>
+              ) : (
+                Object.entries(docCategories).map(([category, docIds]) => {
+                  const Icon = categoryIcons[category];
+                  const matchingDocIds = docIds.filter(docId =>
+                    filteredDocs.some(d => d.id === docId)
+                  );
+
+                  if (matchingDocIds.length === 0) return null;
+
+                  return (
+                    <div key={category}>
+                      <h3 className="flex items-center space-x-2 text-sm font-semibold text-gray-900 dark:text-white mb-3">
+                        <Icon className="w-4 h-4" />
+                        <span>{category}</span>
+                      </h3>
+                      <ul className="space-y-2">
+                        {matchingDocIds.map(docId => {
+                          const doc = docs.find(d => d.id === docId);
+                          if (!doc) return null;
+
+                          return (
+                            <li key={doc.id}>
+                              <a
+                                href={`#${slugify(doc.title)}`}
+                                onClick={() => selectDoc(doc)}
+                                className={`block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
+                                  selectedDoc.id === doc.id
+                                    ? 'bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 font-medium'
+                                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                                }`}
+                              >
+                                {doc.title}
+                              </a>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  );
+                })
+              )}
             </nav>
           </motion.aside>
 

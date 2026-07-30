@@ -42,5 +42,7 @@
       "**Legacy translation automation** - removed the previous translation-service workflows, generated progress assets, and helper scripts so Hosted Weblate is the single automated localization path"
     ],
     "comingSoon": []
-  }
+  },
+  "apkSize": 68302819,
+  "apkUpdatedAt": "2026-06-05T21:26:50Z"
 }

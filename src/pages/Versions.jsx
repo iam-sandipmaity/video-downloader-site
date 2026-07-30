@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Download, Github, Package, ExternalLink, ChevronDown, Calendar, HardDrive, CheckCircle2, Wrench, Zap, XCircle, FileCheck, Clock } from 'lucide-react';
 import { getAllVersions } from '../utils/apkDataLoader';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 const Versions = () => {
+  useDocumentTitle('Version History');
   const [expandedVersion, setExpandedVersion] = useState(0);
   const versions = getAllVersions();
 
